@@ -1,5 +1,5 @@
 import React from 'react'
-import Helmet from "react-helmet"
+import { Helmet, HelmetProvider } from "react-helmet-async"
 
 import { getToken } from '../../helpers/tokens'
 
@@ -13,7 +13,7 @@ import Sidebar from '../templates/Sidebar';
 
 const Layout = ({pageMeta, children}) => {
   return (
-    <>
+    <HelmetProvider>
         <Helmet>
             <title>{ ` ${ pageMeta.title } - ${ APP_TITLE }  `}</title>
 
@@ -36,7 +36,7 @@ const Layout = ({pageMeta, children}) => {
             </section>
 
         </div>
-    </>
+    </HelmetProvider>
   )
 }
 

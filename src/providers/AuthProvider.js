@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
 
         try{
-            const response = await fetch(`${API_URL}/users/me`, {
+            const response = await fetch(`${API_URL}/users/me?populate=*`, {
                 headers: { Authorization: `${BEARER} ${token}` },
               });
               const data = await response.json();

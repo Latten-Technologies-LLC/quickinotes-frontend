@@ -1,5 +1,5 @@
 import React from 'react'
-import Helmet from "react-helmet"
+import { Helmet, HelmetProvider } from "react-helmet-async"
 
 import { getToken } from '../../helpers/tokens'
 
@@ -8,7 +8,7 @@ import { APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHAR
 
 const AuthLayout = ({pageMeta, children}) => {
   return (
-    <>
+    <HelmetProvider>
         <Helmet>
             <title>{ ` ${ pageMeta.title } - ${ APP_TITLE }  `}</title>
 
@@ -28,7 +28,7 @@ const AuthLayout = ({pageMeta, children}) => {
             </section>
 
         </div>
-    </>
+    </HelmetProvider>
   )
 }
 

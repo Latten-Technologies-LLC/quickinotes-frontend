@@ -3,7 +3,7 @@ import { getToken, removeToken } from '../../helpers/tokens'
 import { useNavigate } from 'react-router-dom'
 
 export default function Sidebar() {
-    const navigate = useNavigate();
+      const navigate = useNavigate();
     
       const handleLogout = () => {
         removeToken();
@@ -21,7 +21,7 @@ export default function Sidebar() {
                     <div className='sidebar-middle-item'>
                         <div className='sidebar-middle-item-user'>
                             <ul className="fa-ul">
-                                <li><span className='fa-li'><i className="fa-solid fa-note-sticky"></i></span> <a href='/timeline'>Notes</a></li>
+                                <li><span className='fa-li'><i className="fa-solid fa-note-sticky"></i></span> <a href='/timeline'>Timeline</a></li>
                                 <li><span className='fa-li'><i className="fa-solid fa-book"></i></span> <a href='/notebooks'>Notebooks</a></li>
                                 <li><span className='fa-li'><i className="fa-solid fa-pen-ruler"></i></span> <a href='/timeline/drafts'>Drafts</a></li>
                             </ul>
