@@ -1,24 +1,23 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { getToken } from '../../helpers/tokens'
-import { Navigate, redirect, useNavigate, useParams } from 'react-router-dom'
+import { isAuthenticated } from '../../utils/Auth';
+import { useNavigate, useParams } from 'react-router-dom'
 import { http } from '../../helpers/http';
 
 import { useAuthContext } from "../../context/AuthContext";
 
-import Layout from '../layouts/Layout'
-
-import FetchNotes, { Note } from '../../helpers/Notes'
+// Layouts
+import NotFound from '../messages/NotFound';
+import AuthLayout from '../layouts/Layout'
 
 // Moment js
 import moment from 'moment';
 
-// Markdown
-import ReactMarkdown from 'react-markdown';
-
+// Tinymce
 import { Editor } from '@tinymce/tinymce-react';
 
+let didInit = false;
+
 export default function EditNote() {
-  const [authenticated, setAuthenticated] = useState(false)
   const navigate = useNavigate()
 
   // TinyMCE
@@ -31,102 +30,108 @@ export default function EditNote() {
 
   const { user, isLoading, setUser } = useAuthContext();
 
-  useEffect(() => {
-    if (getToken()) {
-      setAuthenticated(true)
-    }
-  }, [])
-
   // Get note data
   const { id } = useParams();
-  const [note , setNote] = useState({});
+  const [note, setNote] = useState({});
 
+  // Get note data through API
   useEffect(() => {
-    const getNote = async () => {
-        const noteFromServer = await http.get("http://localhost:1337/api/notes/" + id).then((response) => 
-        { 
-            setNote(response.data.data.attributes);
-        }).catch((err) => {
-            navigate('/notes');
-        });  
+    if(!didInit) {
+      http.get("http://localhost:1337/api/notes/" + id + "?populate=*").then((response) => 
+      {
+        if(response.status === 200)
+        {
+          setNote(response.data.data.attributes);
+          didInit = true;
+        }
+      }).catch((err) => {
+        navigate('/notes');
+      });
     }
-
-    getNote();
   }, [id]);
 
   // Edit note
-    const editNote = async (e) => {
-        e.preventDefault();
+  const editNote = async (e) => {
+    e.preventDefault();
 
-        const note_name = e.target.note_name.value;
-        const note_body = e.target.note_body.value;
+    const note_name = e.target.note_name.value;
+    const note_body = e.target.note_body.value;
 
-        const noteData = {
-            data: {
-                note_name,
-                note_body
-            }
-        }
-
-        const noteFromServer = await http.put("http://localhost:1337/api/notes/" + id, noteData).then((response) =>
-        {
-            navigate('/notes/v/' + id);
-        }).catch((err) => {
-            console.log(err);
-        });
+    const noteData = {
+      data: {
+        note_name,
+        note_body
+      }
     }
+  }
 
   // Fix dates
-  let created = moment(note.createdAt).fromNow();
+  let created = moment(note.createdAt).format("MMM Do YYYY");
   let updated = moment(note.updatedAt).fromNow();
 
-  let action = "http://localhost:1337/api/notes/" + id;
+  let author = note.user?.data.id;
+  let currentUser = user?.id;
+
+  // Authenticated?
+  if (!isAuthenticated() || author != currentUser) {
+    return <NotFound />;
+  }
 
   return (
-      <Layout pageMeta={{title: 'View Note'}}>
+    <AuthLayout pageMeta={{ title: 'View Note' }}>
+      <form onSubmit={editNote} method='PUT'>
+        <div className='page page-notes-head'>
+          <div className='page-notes-head-title container'>
+            <h1>Edit Note</h1>
+            <h1><input type="text" name="note_name" defaultValue={note.note_name} /></h1>
+            <ul>
+              <li>{created}</li>
+              <li>Last updated {updated}</li>
+            </ul>
+            <div className='page-notes-head-actions'>
+
+            </div>
+          </div>
+        </div>
         <div className='page-notes-view'>
-            <div className='page-notes-view-inner container-fluid'>
-              <div className='page-notes-view-note'>
-                <form onSubmit={editNote} method='PUT'>
-                    <div className='page-notes-view-note-title'>
-                        <h2><input type="text" name="note_name" value={note.note_name} /></h2>
-                        <ul>
-                            <li><i className="fa-solid fa-clock"></i> Created {created}</li>
-                            <li><i className="fa-solid fa-pen"></i> Updated {updated}</li>
-                        </ul>
-                    </div>
-                    <div className='page-notes-view-note-content'>
-                        <Editor
-                            apiKey="5pwiuoduxtz2fuazw1kk7xpcal9ytfkla457ygji53oozf3f"
-                            onInit={(evt, editor) => editorRef.current = editor}
-                            initialValue={note.note_body}
-                            textareaName="note_body"
-                            init={{
-                            height: 500,
-                            menubar: true,
-                            forced_root_block: '',
-                            plugins: [
-                                'advlist autolink lists link image charmap print preview anchor',
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                            ],
-                            toolbar: 'undo redo | formatselect | format ' +
-                            'bold italic backcolor | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent | ' +
-                            'removeformat | help',
-                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                            }}
-                        />
-                    </div>
-                    <div className='page-notes-view-note-actions'>
-                        <button type='submit' className='btn btn-primary'>Save Changes</button>
-                        <button type='button' className='btn btn-danger'>Delete</button>
-                    </div>
-                </form>
+          <div className='page-notes-view-inner container'>
+            <div className='page-notes-view-note'>
+              <div className='page-notes-view-note-title'>
+                <ul>
+                </ul>
+              </div>
+              <div className='page-notes-view-note-content'>
+                <Editor
+                  apiKey="5pwiuoduxtz2fuazw1kk7xpcal9ytfkla457ygji53oozf3f"
+                  plugins=''
+                  tinymceScriptSrc="/tinymce/tinymce.min.js"
+                  onInit={(evt, editor) => editorRef.current = editor}
+                  initialValue={note.note_body}
+                  textareaName="note_body"
+                  init={{
+                    height: 400,
+                    menubar: true,
+                    plugins: [
+                      'advlist autolink lists link image charmap print preview anchor',
+                      'searchreplace visualblocks code fullscreen',
+                      'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar: 'undo redo | formatselect | format ' +
+                      'bold italic backcolor | alignleft aligncenter ' +
+                      'alignright alignjustify | bullist numlist outdent indent | ' +
+                      'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                  }}
+                />
+                <div className='page-notes-view-note-content-actions'>
+                  <button type="submit" className="btn btn-round">Save</button>
+                </div>
               </div>
             </div>
+          </div>
         </div>
-      </Layout>
+      </form>
+    </AuthLayout>
   )
 }
 

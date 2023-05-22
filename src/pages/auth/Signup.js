@@ -58,7 +58,7 @@ const Signout = () => {
         setUser(data.user);
 
         message.success(`Welcome to Quickinotes, ${data.user.username}!`);
-        setTimeout(() => navigate("/timeline"), 3000);
+        setTimeout(() => navigate("/notes"), 3000);
       }
     } catch (error) {
       if (APP_ENV === "development") {

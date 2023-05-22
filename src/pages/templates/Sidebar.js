@@ -1,9 +1,12 @@
 import React from 'react'
 import { getToken, removeToken } from '../../helpers/tokens'
 import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from "../../context/AuthContext";
 
 export default function Sidebar() {
       const navigate = useNavigate();
+ 
+      const { user } = useAuthContext();
     
       const handleLogout = () => {
         removeToken();
@@ -14,16 +17,17 @@ export default function Sidebar() {
     <div className='sidebar'>
         <div className='sidebar-inner'>
             <div className='sidebar-top'>
-                <img src='/images/quickinotes-logo-white.png' alt='Logo' />
+                <h2><i className="fa-regular fa-user"></i></h2>
+                <h4>Hi, {user?.name}</h4>
             </div>
             <div className='sidebar-middle'>
                 {getToken() ? 
                     <div className='sidebar-middle-item'>
                         <div className='sidebar-middle-item-user'>
                             <ul className="fa-ul">
-                                <li><span className='fa-li'><i className="fa-solid fa-note-sticky"></i></span> <a href='/timeline'>Timeline</a></li>
+                                <li><span className='fa-li'><i className="fa-solid fa-bars-staggered"></i></span> <a href='/notes'>Timeline</a></li>
                                 <li><span className='fa-li'><i className="fa-solid fa-book"></i></span> <a href='/notebooks'>Notebooks</a></li>
-                                <li><span className='fa-li'><i className="fa-solid fa-pen-ruler"></i></span> <a href='/timeline/drafts'>Drafts</a></li>
+                                <li><span className='fa-li'><i className="fa-solid fa-note-sticky"></i></span> <a href='/notes/bookmarks'>Notes</a></li>
                             </ul>
                         </div>
                     </div>

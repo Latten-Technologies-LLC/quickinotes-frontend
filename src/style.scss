@@ -2,36 +2,119 @@
 
 // Vars
 $primary-color: #ffffff;
-$dark-primary: #eeeeee;
+$dark-primary: #333333;
 
-$darker-background: #333;
+$background: #fff;
+$background-light: #fff;
 
+$font-color: #111111;
+
+// Accent Colors
+$accent-1: #C7EBB3;
+$accent-2: #F4DFCD;
+
+// Reset
 *{
-    font-family: "futura-pt", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-family: 'Poppins', monospace;
 }
 
 body{
-    background: $dark-primary;
+    background: $background;
     margin: 0;
     padding: 0;
 }
 
+h1{
+    font-size: 3.0em;
+    font-weight: 600;
+}
+
+h2{
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+h3{
+    font-size: 2.0em;
+    font-weight: 600;
+}
+
+h4{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h5{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+h6{
+    font-size: 1.0em;
+    font-weight: 600;
+}
+
+p{
+
+}
+
 // Website inner
 .website-inner{
-    margin-left: 200px;
     height: 100vh;
 
-    background: $dark-primary;
+    background: $background-light;
 }
 
 // Auth Website inner
 .auth-website-inner{
-    background: $dark-primary;
+    background: $background-light;
     min-height: 100vh;
 }
 
+// Buttons
+.btn{
+    font-weight: bold;
+    margin-right: 15px;
+
+    padding-right: 15px;
+    padding-left: 15px;
+
+    min-width: 48px;
+    min-height: 48px;
+
+    line-height: 2.1em;
+
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+
+    span{
+        padding-left: 3px;
+        margin-top: -3px;
+
+        position: relative;
+        top: -1px;
+    }
+
+}
+
+.btn:hover{
+    cursor: pointer;
+    color: #000000;
+    border: 2px solid #000000;
+    background: white;
+}
+
+.btn-round{
+    border-radius: 28px;
+}
+
+.btn-active{
+    background: #ffffff;
+    color: $font-color;
+
+    border: 2px solid $font-color;
+}
 
 // Header
 .header{
@@ -41,19 +124,61 @@ body{
     .header-inner{
 
         .header-row{
-            
-            .header-page{
-                padding-top: 20px;
-                padding-left: 20px;
 
-                h1{
-                    font-size: 2.0em;
-                    font-weight: 600;
+            .header-menu-action{
+                padding-left: 0px;
 
-                    margin: 0px;
-                    padding: 0px;
+                .header-menu-action-inner{
+                    padding: 10px;
+                    padding-top: 15px;
 
-                    color: #333;
+                    padding-left: 0px;
+
+                    button{
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                        background: #000;
+                        color: white;
+                        outline: none;
+                        border: none;
+                        border-radius: 50%;
+
+                        height: 45px;
+                        width: 45px;
+                        transition: all 0.2s ease-in-out;
+                    }
+
+                    button:hover{
+                        cursor: pointer;
+                    }
+
+                    button.header-menu-action-inner-button-active{
+                        background: #fff;
+                        color: #000;
+                        transition: all 0.2s ease-in-out;
+                    }
+
+                    h2{
+                        font-size: 2.0em;
+                        font-weight: 400;
+                        
+                        position: relative;
+                        top: 5px;
+                        left: 15px;
+
+                        margin: 0px;
+                        padding: 0px;
+    
+                        color: #333;
+    
+                        text-align: left;
+
+                        display: inline-block;
+
+                        a{
+                            text-decoration: none;
+                            color: $font-color;
+                        }
+                    }
                 }
             }
 
@@ -64,13 +189,15 @@ body{
                     padding-right:5px;
 
                     input{
-                        border: 1px solid #fff;
-                        border-radius:22px;
+                        border: none;
+                        border-radius:6px;
                         padding: 5px;
                         padding-left: 15px;
-                        width: 100%;
+                        width: 180px;
 
-                        background: #aaa;
+                        float: right;
+
+                        background: rgba(0,0,0,.2);
 
                         transition: all 0.2s ease-in-out;
                     }
@@ -104,28 +231,42 @@ body{
 }
 
 // Sidebar
+.sidebar.sidebar-active{
+    display: block;
+    transition: all 0.2s ease-in-out;
+}
+
 .sidebar{
     background: $primary-color;
-    width: 200px;
-    height: 100vh;
+    width: 225px;
 
-    float: left;
-    border-right: 1px solid rgba(0,0,0,.2);
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
+    position: fixed;
+    left: 45px;
+    top: 80px;
+
+    display: none;
 
     .sidebar-inner{
 
         .sidebar-top{
-            height: 80px;
-            padding: 10px;
+            min-height: 100px;
+            padding: 15px;
 
             text-align: center;
 
             border-bottom: 1px solid rgba(0,0,0,0.1);
 
-            img{
-                width: 100%;
-                border-radius: 5px;
+            h2{
+
+            }
+
+            h4{
+                font-size: 1em;
+                text-align:center;
+                font-weight: 600;
             }
         }
 
@@ -145,15 +286,22 @@ body{
 
                         li{
                             color: #333;
-                            font-size: 1.4em;
+                            font-size: 1.2em;
 
-                            padding-bottom: 15px;
+                            padding-bottom: 10px;
+
+                            span{
+
+                                i{
+                                    font-size: .8em;
+                                }
+                            }
 
                             a{
                                 color: #333;
                                 text-decoration: none;
 
-                                font-weight: 400;
+                                font-weight: 500;
 
                             }
                         }
@@ -163,9 +311,8 @@ body{
         }
 
         .sidebar-bottom{
-            position: absolute;
-            bottom: 0px;
-            width:200px;
+
+            width:225px;
 
             padding: 20px;
 
@@ -215,22 +362,116 @@ body{
     }
 }
 
+// Page frontend logic
+.page{
+    padding-top: 50px;
+}
+
 // Page: View Note
+.page-notes-head{
+
+    .page-notes-head-title{
+        border-bottom: 1px solid #aaa;
+        padding: 0px;
+
+        h1:first-child{
+            font-size: 3em;
+            padding-bottom: 30px;
+        }
+
+        h1{
+            font-weight: 400;
+            font-size: 2.5em;
+
+            span{
+                font-size: .5em;
+                font-weight: 400;
+            }
+
+            input{
+                width: 100%;
+                padding: 10px;
+                padding-left: 15px;
+
+                border: 2px solid #eee;
+                border-radius: 10px;
+
+            }
+        }
+
+        ul{
+            margin: 0px;
+            padding: 0px;
+            margin-bottom: 15px;
+
+            li{
+                display: inline-block;
+                padding-right: 25px;
+                color: rgb(107 114 128/1);
+
+                font-weight: 400;
+            }
+        }
+
+        .page-notes-head-actions{
+            width: fit-content;
+            border-radius: 32px;
+
+            margin-top: 35px;
+            margin-bottom: 15px;
+
+                a{
+                    background: #000000;
+                    color: #ffffff;
+
+                    border: 2px solid transparent;
+
+                    font-weight: 400;
+
+                    border-radius: 28px;
+
+                }
+
+                a:hover{
+                    background: #ffffff;
+                    color: $font-color;
+                    border: 2px solid $font-color;
+                }
+
+                a:last-child{
+                    margin-right: 0px;
+                }
+
+                a.bookmark-active{
+                    color: #feba57;
+                }
+        }
+    }
+}
+
 .page-notes-view{
 
     .page-notes-view-inner{
-        padding: 0px 20px;
+        padding: 0px;
 
         .page-notes-view-note{
             background: $primary-color;
-            padding: 20px;
 
             border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
             .page-notes-view-note-title{
                 padding-bottom: 10px;
-                border-bottom: 2px solid #eee;
+
+                h1{
+
+                    input{
+                        width: 100%;
+                        padding-left: 5px;
+
+                        border: 2px solid #eee;
+                        border-radius: 10px;
+                    }
+                }
 
                 h2{
 
@@ -273,6 +514,15 @@ body{
                         padding-bottom: 15px;
                     }
                 }
+
+                .page-notes-view-note-content-actions{
+                    padding-top: 15px;
+                    margin-top: 20px;
+
+                    button{
+
+                    }
+                }
             }
         }
     }
@@ -301,23 +551,47 @@ body{
     .page-timeline-inner{
         padding: 0px 20px;
 
-        .page-timeline-row{
-            //background: $primary-color;
-            background: white;
+        .page-timeline-header{
+            border-bottom: 1px solid rgba(0,0,0,.5);
+            margin-bottom: 15px;
 
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            h2{
+                padding-bottom: 20px;
+                padding-top: 30px;
 
-            .left-column{
-                border-radius: 5px;
-                //background: #eee;
-                background: white;
-                border-right: 1px solid #eee;
-                padding: 20px;
+                font-size: 4.4em;
+                font-weight: 500;
+
+                line-break: strict;
             }
 
-            .right-column{
+            .page-timeline-header-actions{
+                padding-bottom: 15px;
 
+                ul{
+                    padding: 0px;
+                    margin: 0px;
+
+                    li{
+                        list-style: none;
+                        display: inline-block;
+
+                        a{
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .page-timeline-all-notes{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+
+            .note{
+                flex-grow: 0;
+                flex-basis: 31.5%;
             }
         }
     }
@@ -374,6 +648,75 @@ body{
                 color: #fff;
 
                 font-weight: bold;
+            }
+        }
+    }
+}
+
+// Note componant
+.note{
+    background: $accent-1;
+    padding: 20px;
+
+    border-radius: 15px;
+    cursor: pointer;
+
+    height: fit-content;
+
+    .note-header{
+
+        h6{
+
+        }
+    }
+
+    .note-body{
+
+        p{
+            font-size: .9em;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .note-body-tags{
+
+        }
+
+        .note-body-actions{
+            text-align: right;
+
+            .note-body-actions-date{
+                font-size: 1em;
+                float: left;
+                align-self: baseline;
+
+                p{
+                    margin-bottom: 0px;
+                    padding-bottom: 0px;
+                }
+            }
+
+            .note-body-actions-btns{
+                text-align: left;
+
+                a{
+                    background: #000000;
+                    color: #ffffff;
+
+                }
+
+                a:hover{
+                    background: #ffffff;
+                    color: $font-color
+                }
+
+                a:last-child{
+                    margin-right: 0px;
+                }
+
+                a.bookmark-active{
+                    color: #feba57;
+                }
             }
         }
     }
