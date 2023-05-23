@@ -33,7 +33,7 @@ export default function ViewNote() {
   // Get note data through API
   useEffect(() => {
     if(!didInit) {
-      http.get("http://localhost:1337/api/notes/" + id + "?populate=*").then((response) => 
+      http.get("/notes/" + id + "?populate=*").then((response) => 
       {
         if(response.status === 200)
         {
