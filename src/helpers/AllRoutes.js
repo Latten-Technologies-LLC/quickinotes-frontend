@@ -33,7 +33,7 @@ export const AllRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={ getToken() ? <Navigate to="notes" /> : <Index /> } />
+      <Route exact path="/" element={ getToken() ? <Navigate to="notes" /> : <Index /> } />
       <Route path="/notes" element={getToken() ? <Notes/> : <Navigate to="/auth/signin" /> } />
       <Route path="/notes/bookmarks" element={getToken() ? <Bookmarks/> : <Navigate to="/auth/signin" /> } />
       <Route path="/notes/drafts" element={getToken() ? <Drafts/> : <Navigate to="/auth/signin" /> } />

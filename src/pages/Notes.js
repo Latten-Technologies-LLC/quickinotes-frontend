@@ -11,7 +11,6 @@ import { FetchNotes, Note } from '../utils/Notes'
 
 export default function Notes() {
   const navigate = useNavigate()
-
   const { user } = useAuthContext();
 
   // Fetch all notes
