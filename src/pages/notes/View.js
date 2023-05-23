@@ -30,6 +30,8 @@ export default function ViewNote() {
   const { id } = useParams();
   const [note, setNote] = useState({});
 
+console.log(id);
+
   // Get note data through API
   useEffect(() => {
     if(!didInit) {
@@ -41,7 +43,8 @@ export default function ViewNote() {
           didInit = true;
         }
       }).catch((err) => {
-        navigate('/notes');
+        console.log(err);
+        //navigate('/notes');
       });
     }
   }, [id]);
