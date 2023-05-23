@@ -19,6 +19,16 @@ let didInit = false;
 
 export default function EditNote() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
+
+  if(loading)
+  {
+    // Blur the page
+    document.body.style.filter = "blur(15px)";
+  }else{
+    // Unblur the page
+    document.body.style.filter = "none";
+  }
 
   // TinyMCE
   const editorRef = useRef(null);
@@ -28,7 +38,7 @@ export default function EditNote() {
     }
   };
 
-  const { user, isLoading, setUser } = useAuthContext();
+  const { user } = useAuthContext();
 
   // Get note data
   const { id } = useParams();
@@ -43,6 +53,7 @@ export default function EditNote() {
         {
           setNote(response.data.data.attributes);
           didInit = true;
+          setLoading(false);
         }
       }).catch((err) => {
         navigate('/notes');
@@ -111,11 +122,6 @@ export default function EditNote() {
                   init={{
                     height: 400,
                     menubar: true,
-                    plugins: [
-                      'advlist autolink lists link image charmap print preview anchor',
-                      'searchreplace visualblocks code fullscreen',
-                      'insertdatetime media table paste code help wordcount'
-                    ],
                     toolbar: 'undo redo | formatselect | format ' +
                       'bold italic backcolor | alignleft aligncenter ' +
                       'alignright alignjustify | bullist numlist outdent indent | ' +
@@ -124,7 +130,7 @@ export default function EditNote() {
                   }}
                 />
                 <div className='page-notes-view-note-content-actions'>
-                  <button type="submit" className="btn btn-round">Save</button>
+                  <input type="submit" className="btn btn-round" value="Save" />
                 </div>
               </div>
             </div>

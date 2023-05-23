@@ -24,11 +24,23 @@ let didInit = false;
 export default function ViewNote() {
   // Authentication
   const navigate = useNavigate()
-  const { user, isLoading, setUser } = useAuthContext();
+  const { user } = useAuthContext();
 
   // Get note data
   const { id } = useParams();
   const [note, setNote] = useState({});
+
+  // Loading
+  const [loading, setLoading] = useState(true);
+
+  if(loading)
+  {
+    // Blur the page
+    document.body.style.filter = "blur(15px)";
+  }else{
+    // Unblur the page
+    document.body.style.filter = "none";
+  }
 
   // Get note data through API
   useEffect(() => {
@@ -39,6 +51,7 @@ export default function ViewNote() {
         {
           setNote(response.data.data.attributes);
           didInit = true;
+          setLoading(false);
         }
       }).catch((err) => {
         navigate('/notes');
