@@ -276,9 +276,20 @@ p{
 
             .sidebar-middle-item{
 
+                .btn{
+                    width: 100%;
+                    margin-bottom: 10px;
+
+                    i{
+                        position: relative;
+                        top:1px;
+                    }
+                }
+
                 .sidebar-middle-item-user{
                    padding: 35px;
                    padding-top: 10px;
+
 
                     ul{
                         padding: 0px;
@@ -549,7 +560,7 @@ p{
 .page-timeline{
 
     .page-timeline-inner{
-        padding: 0px 20px;
+        padding: 0px 00px;
 
         .page-timeline-header{
             border-bottom: 1px solid rgba(0,0,0,.5);
