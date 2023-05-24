@@ -23,11 +23,12 @@ export default function Sidebar() {
             <div className='sidebar-middle'>
                 {getToken() ? 
                     <div className='sidebar-middle-item'>
+                        <a className="btn" href='/notes/new'><i className="fa-solid fa-plus"></i> New Note</a>
                         <div className='sidebar-middle-item-user'>
                             <ul className="fa-ul">
-                                <li><span className='fa-li'><i className="fa-solid fa-bars-staggered"></i></span> <a href='/notes'>Timeline</a></li>
-                                <li><span className='fa-li'><i className="fa-solid fa-book"></i></span> <a href='/notebooks'>Notebooks</a></li>
-                                <li><span className='fa-li'><i className="fa-solid fa-note-sticky"></i></span> <a href='/notes/bookmarks'>Notes</a></li>
+                                <li><span className='fa-li'><i className="fa-solid fa-note-sticky"></i></span> <a href='/notes'>Notes</a></li>
+                                <li><span className='fa-li'><i className="fa-solid fa-book-bookmark"></i></span> <a href='/notes/bookmarks'>Bookmarks</a></li>
+                                <li><span className='fa-li'><i className="fa-solid fa-pen-ruler"></i></span> <a href='/notes/drafts'>Drafts</a></li>
                             </ul>
                         </div>
                     </div>

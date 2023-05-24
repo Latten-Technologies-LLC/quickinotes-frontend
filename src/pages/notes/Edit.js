@@ -74,6 +74,15 @@ export default function EditNote() {
         note_body
       }
     }
+
+    const response = await http.put("/notes/" + id, noteData);
+
+    if(response.status === 200)
+    {
+      navigate('/notes/v/' + id);
+    }else{
+      alert("Something went wrong");
+    }
   }
 
   // Fix dates
