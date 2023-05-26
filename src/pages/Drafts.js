@@ -38,7 +38,7 @@ export default function Drafts() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'Drafts' }}>
+    <AuthLayout pageMeta={{ title: 'Drafts', footer: false, header: true }}>
       <div className='page-timeline'>
         <div className='page-timeline-inner container'>
           <div className='page-timeline-header'>

@@ -89,7 +89,7 @@ export default function EditNote() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'Edit Note' }}>
+    <AuthLayout pageMeta={{ title: 'Edit Note', footer: false, header: true }}>
       <form onSubmit={editNote} method='PUT'>
         <div className='page page-notes-head'>
           <div className='page-notes-head-title container'>

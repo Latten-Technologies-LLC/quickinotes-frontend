@@ -51,7 +51,7 @@ export default function Settings() {
   }
 
   return (
-      <AuthLayout pageMeta={{title: "Settings"}}>
+      <AuthLayout pageMeta={{title: "Settings", footer: false, header: true}}>
           <div className='page-settings'>
             <div className='page-settings-inner container'>
                 <h1>Settings</h1>

@@ -38,7 +38,7 @@ export default function Bookmarks() {
 
     }
     return (
-        <AuthLayout pageMeta={{ title: 'Bookmarks' }}>
+        <AuthLayout pageMeta={{ title: 'Bookmarks', footer: false, header: true }}>
             <div className='page-timeline'>
                 <div className='page-timeline-inner container'>
                     <div className='page-timeline-header'>
