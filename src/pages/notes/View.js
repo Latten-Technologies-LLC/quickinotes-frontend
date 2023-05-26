@@ -19,7 +19,9 @@ import rehypeRaw from 'rehype-raw'
 
 import NotFound from '../messages/NotFound';
 
-let didInit = false;
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 
 export default function ViewNote() {
   // Authentication
@@ -29,35 +31,19 @@ export default function ViewNote() {
   // Get note data
   const { id } = useParams();
   const [note, setNote] = useState({});
-
-  // Loading
   const [loading, setLoading] = useState(true);
-
-  if(loading)
-  {
-    // Blur the page
-    document.body.style.filter = "blur(15px)";
-  }else{
-    // Unblur the page
-    document.body.style.filter = "none";
-  }
 
   // Get note data through API
   useEffect(() => {
-    if(!didInit) {
-      http.get("/notes/" + id + "?populate=*").then((response) => 
-      {
-        if(response.status === 200)
-        {
-          setNote(response.data.data.attributes);
-          didInit = true;
-          setLoading(false);
-        }
-      }).catch((err) => {
-        navigate('/notes');
-      });
-    }
-  }, [id]);
+    http.get("/notes/" + id + "?populate=*").then((response) => {
+      if (response.status === 200) {
+        setNote(response.data.data.attributes);
+        setLoading(false);
+      }
+    }).catch((err) => {
+      navigate('/notes');
+    });
+  }, []);
 
   // Fix dates
   let created = moment(note.createdAt).format("MMM Do YYYY");
@@ -70,8 +56,9 @@ export default function ViewNote() {
   let currentUser = user?.id;
 
   // Check auth and ownership
-  if (!isAuthenticated() || author != currentUser) {
-    return <NotFound />;
+  if (!isAuthenticated() || author != currentUser && loading) {
+    //return <NotFound />;
+    navigate('/auth/signin');
   }
 
   return (

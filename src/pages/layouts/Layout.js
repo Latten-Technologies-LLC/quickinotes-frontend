@@ -29,11 +29,17 @@ const Layout = ({pageMeta, children}) => {
         <div className='website'>
             <Sidebar token={getToken()}/>
 
-            <section className='website-inner'>
-                <Header pageMeta={pageMeta} token={getToken()}/>
-                {children}
-                <Footer url={ APP_URL }/>
-            </section>
+              <section className='website-inner'>
+                  {pageMeta.header ? 
+                    <Header pageMeta={pageMeta} token={getToken()}/>
+                  : null}
+                  
+                  {children}
+
+                  {pageMeta.footer ?
+                    <Footer url={ APP_URL }/>
+                  : null}
+              </section>
 
         </div>
     </HelmetProvider>

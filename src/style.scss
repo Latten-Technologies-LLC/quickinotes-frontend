@@ -98,7 +98,7 @@ p{
 
 }
 
-.btn:hover{
+.btn:hover, .btn.unset {
     cursor: pointer;
     color: #000000;
     border: 2px solid #000000;
@@ -121,7 +121,10 @@ p{
     background: transparent;
     height: 80px;
 
-    .header-inner{
+    .header-inner {
+        @media screen and (max-width: 768px) {
+            padding: 0px 30px;
+        }
 
         .header-row{
 
@@ -188,7 +191,29 @@ p{
                     padding-top: 20px;
                     padding-right:5px;
 
-                    input{
+                    .header-links {
+                        text-align: right;
+
+                        ul {
+
+                            li {
+                                display: inline-block;
+                                margin-left: 5px;
+
+                                a {}
+
+                                a.btn-login {
+                                    background: white;
+                                    color: $font-color;
+                                }
+                            }
+                        }
+                    }
+
+                    input {
+                        @media screen and (max-width: 768px) {
+                            display: none;
+                        }
                         border: none;
                         border-radius:6px;
                         padding: 5px;
@@ -225,7 +250,21 @@ p{
 .footer{
     padding: 20px;
 
-    p{
+    position: absolute;
+    bottom: 0px;
+
+
+    p {
+        @media screen and (max-width: 768px) {
+            text-align: center;
+            font-size: 3vmin;
+        }
+
+        padding: 0px;
+        margin: 0px;
+
+        color: white;
+
         font-weight: bold;
     }
 }
@@ -236,8 +275,13 @@ p{
     transition: all 0.2s ease-in-out;
 }
 
-.sidebar{
+.sidebar {
+    @media screen and (max-width: 768px) {
+        width: 90%;
+        left: 20px;
+    }
     background: $primary-color;
+
     width: 225px;
 
     border-radius: 5px;
@@ -379,7 +423,11 @@ p{
 }
 
 // Page: View Note
-.page-notes-head{
+.page-notes-head {
+    @media screen and (max-width: 768px) {
+        padding: 0px 20px;
+        padding-top: 15px;
+    }
 
     .page-notes-head-title{
         border-bottom: 1px solid #aaa;
@@ -462,7 +510,10 @@ p{
 
 .page-notes-view{
 
-    .page-notes-view-inner{
+    .page-notes-view-inner {
+        @media screen and (max-width: 768px) {
+            padding: 0px 20px;
+        }
         padding: 0px;
 
         .page-notes-view-note{
@@ -559,14 +610,21 @@ p{
 // Page: Timeline
 .page-timeline{
 
-    .page-timeline-inner{
+    .page-timeline-inner {
+        @media screen and (max-width: 768px) {
+            padding: 0px 20px;
+        }
         padding: 0px 00px;
 
         .page-timeline-header{
             border-bottom: 1px solid rgba(0,0,0,.5);
             margin-bottom: 15px;
 
-            h2{
+            h2 {
+                @media screen and (max-width: 768px) {
+                    font-size: 12vw;
+                }
+
                 padding-bottom: 20px;
                 padding-top: 30px;
 
@@ -600,7 +658,10 @@ p{
             flex-wrap: wrap;
             gap: 30px;
 
-            .note{
+            .note {
+                @media screen and (max-width: 768px) {
+                    flex-basis: 100%;
+                }
                 flex-grow: 0;
                 flex-basis: 31.5%;
             }
@@ -609,14 +670,20 @@ p{
 }
 
 // Page: Sign In
-.sign-in-main{
-    position: relative;
-    top: 20vh;
+.sign-in-main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @media screen and (max-width: 768px) {
+        width: 80%;
+    }
 
     width: 400px;
     background: white;
 
-    margin: 0px auto;
+    margin: auto;
 
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -638,14 +705,20 @@ p{
                     border-radius: 5px;
                 }
 
-                h2{
+                h2 {
+                    @media screen and (max-width: 768px) {
+                        font-size: 1.2em;
+                    }
                     padding-top: 25px;
                     font-weight: bold;
 
                 }
 
-                span{
-
+                span {
+                    @media screen and (max-width: 768px) {
+                        font-size: .8em;
+                        line-height: 1px !important;
+                    }
                 }
             }
         }
@@ -653,7 +726,19 @@ p{
         .sign-in-main-body{
             padding-top: 25px;
 
-            .login_submit_btn{
+            .show-btns{
+
+                .btn{
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+
+                .btn:last-child{
+                    margin-bottom: 0px;
+                }
+            }
+
+            .login_submit_btn {
                 width: 100%;
                 background: #333;
                 color: #fff;

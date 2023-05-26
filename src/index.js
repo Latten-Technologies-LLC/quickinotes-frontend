@@ -4,6 +4,7 @@ import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss'
+//import './fontawesome/css/fontawesome.min.css'
 
 import { AuthProvider } from './providers/AuthProvider';
 import { BrowserRouter } from 'react-router-dom';
