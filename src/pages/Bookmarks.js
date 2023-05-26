@@ -5,12 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from "../context/AuthContext";
 
 import NotFound from './messages/NotFound';
-import AuthLayout from './layouts/AuthLayout'
+import Layout from './layouts/Layout'
 
 import { FetchBookmarkedNotes, Note } from '../utils/Notes'
-
-// Page transitions
-import { motion } from "framer-motion";
 
 export default function Bookmarks() {
     const navigate = useNavigate()
@@ -20,25 +17,11 @@ export default function Bookmarks() {
     // Get bookmarks
     const bookmarks = FetchBookmarkedNotes(user);
 
-    const container = {
-        hidden: { opacity: 1, scale: 0 },
-        visible: {
-          opacity: 1,
-          scale: 1,
-          transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2
-          }
-        }
-      };
-
     if (!isAuthenticated()) {
-        //return <NotFound />;
-        navigate('/auth/signin');
-
+        return <NotFound />;
     }
     return (
-        <AuthLayout pageMeta={{ title: 'Bookmarks' }}>
+        <Layout pageMeta={{ title: 'Bookmarks' }}>
             <div className='page-timeline'>
                 <div className='page-timeline-inner container'>
                     <div className='page-timeline-header'>
@@ -51,15 +34,13 @@ export default function Bookmarks() {
                             </ul>
                         </div>
                     </div>
-                    <motion.div className='page-timeline-all-notes' variants={container}
-    initial="hidden"
-    animate="visible">
+                    <div className='page-timeline-all-notes'>
                         {bookmarks?.map((note, key) => (
                             <Note key={key} note={note} checkBookmarked='true' />
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
-        </AuthLayout>
+        </Layout>
     )
 }

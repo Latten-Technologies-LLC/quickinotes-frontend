@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { isAuthenticated } from '../../utils/Auth';
 import { useNavigate, useParams } from 'react-router-dom'
 import { http } from '../../helpers/http';
@@ -19,10 +19,6 @@ import rehypeRaw from 'rehype-raw'
 
 import NotFound from '../messages/NotFound';
 
-// Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as Icons from '@fortawesome/free-solid-svg-icons'
-
 let didInit = false;
 
 export default function ViewNote() {
@@ -34,15 +30,34 @@ export default function ViewNote() {
   const { id } = useParams();
   const [note, setNote] = useState({});
 
+  // Loading
+  const [loading, setLoading] = useState(true);
+
+  if(loading)
+  {
+    // Blur the page
+    document.body.style.filter = "blur(15px)";
+  }else{
+    // Unblur the page
+    document.body.style.filter = "none";
+  }
+
   // Get note data through API
-  http.get("/notes/" + id + "?populate=*").then((response) => {
-    if (response.status === 200) {
-      setNote(response.data.data.attributes);
-      didInit = true;
+  useEffect(() => {
+    if(!didInit) {
+      http.get("/notes/" + id + "?populate=*").then((response) => 
+      {
+        if(response.status === 200)
+        {
+          setNote(response.data.data.attributes);
+          didInit = true;
+          setLoading(false);
+        }
+      }).catch((err) => {
+        navigate('/notes');
+      });
     }
-  }).catch((err) => {
-    navigate('/notes');
-  });
+  }, [id]);
 
   // Fix dates
   let created = moment(note.createdAt).format("MMM Do YYYY");
@@ -54,12 +69,9 @@ export default function ViewNote() {
   let author = note.user?.data.id;
   let currentUser = user?.id;
 
-  let status = note?.draft ? "Draft" : "Published";
-
   // Check auth and ownership
-  if (!isAuthenticated() || author != currentUser && !didInit) {
-    //return <NotFound />;
-    navigate('/auth/signin');
+  if (!isAuthenticated() || author != currentUser) {
+    return <NotFound />;
   }
 
   return (
@@ -70,12 +82,12 @@ export default function ViewNote() {
           <ul>
             <li>{created}</li>
             <li>Last updated {updated}</li>
-            <li>{status}</li>
+            <li>4 min read</li>
           </ul>
           <div className='page-notes-head-actions'>
             <a onClick={routeToNoteEdit(note.id)} className='btn btn-round' alt="Edit Note" href={`/notes/e/${id}`}>Edit</a>
-            <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`}><FontAwesomeIcon icon={Icons.faStar} /></a>
-            <a onClick={deleteNote} data-id={id} className='btn btn-round delete' href={`/notes/e/${id}`} alt="Delete Note"><FontAwesomeIcon icon={Icons.faTrash} /></a>
+            <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`}><i className="fa-solid fa-star"></i></a>
+            <a onClick={deleteNote} data-id={id} className='btn btn-round delete' href={`/notes/e/${id}`} alt="Delete Note"><i className="fa-solid fa-trash"></i></a>
           </div>
         </div>
       </div>

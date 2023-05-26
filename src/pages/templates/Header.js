@@ -1,12 +1,6 @@
 import React from 'react'
 
-import { APP_TITLE } from '../../config/const';
-
-// Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as Icons from '@fortawesome/free-solid-svg-icons'
-
-export default function Header({pageMeta, noteMeta, token, style="auth"}) {
+export default function Header({pageMeta, noteMeta, token}) {
     // Sidebar Logic
     const [sidebar, setSidebar] = React.useState(false);
 
@@ -28,29 +22,18 @@ export default function Header({pageMeta, noteMeta, token, style="auth"}) {
     }
   
   return (
-    <header className={`header ${!token ? "unlogged" : ""}`}>
+    <header className='header'>
         <div className='header-inner container'>
             <div className='header-row row'>
                 <div className='header-menu-action col-lg-6'>
                     <div className="header-menu-action-inner">
-                        {token ?
-                        <button onClick={handleSidebar} className='header-menu-action-inner-button'><FontAwesomeIcon icon={Icons.faBars} /></button>
-                        : null}
-                        <h2><a href="/">{APP_TITLE}</a></h2>
+                        <button onClick={handleSidebar} className='header-menu-action-inner-button'><i className="fa-solid fa-bars"></i></button>
+                        <h2><a href="/notes">Quickinotes</a></h2>
                     </div>
                 </div>
                 <div className='header-interactions col-lg-6'>
                     <div className="header-search col-lg-12">
-                        {token ? 
-                            <input type="text" placeholder="Search notes..." />
-                        : 
-                        <div className="header-links">
-                            <ul>
-                                <li><a className="btn btn-login" href="/auth/signin">Sign in</a></li>
-                                <li><a className='btn' href="/auth/signup">Sign up</a></li>
-                            </ul>
-                        </div>
-                        }
+                        <input type="text" placeholder="Search notes..." />
                     </div>
                 </div>
             </div>
