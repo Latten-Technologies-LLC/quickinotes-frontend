@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/AuthContext";
 
 // Layouts
 import NotFound from '../messages/NotFound';
-import AuthLayout from '../layouts/AuthLayout'
+import AuthLayout from '../layouts/Layout'
 
 // Moment js
 import moment from 'moment';
@@ -61,8 +61,7 @@ export default function EditNote() {
     const noteData = {
       data: {
         note_name,
-        note_body,
-        draft: false
+        note_body
       }
     }
 
@@ -89,7 +88,7 @@ export default function EditNote() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'Edit Note' }}>
+    <AuthLayout pageMeta={{ title: 'View Note' }}>
       <form onSubmit={editNote} method='PUT'>
         <div className='page page-notes-head'>
           <div className='page-notes-head-title container'>
