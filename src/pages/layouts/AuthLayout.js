@@ -42,9 +42,15 @@ const AuthLayout = ({pageMeta, children}) => {
             <Sidebar token={getToken()}/>
 
             <section className='auth-website-inner'>
-                <Header pageMeta={pageMeta} token={getToken()}/>
-                {children}
-                <Footer url={ APP_URL }/>
+                  {pageMeta.header ? 
+                    <Header pageMeta={pageMeta} token={getToken()}/>
+                  : null}
+                  
+                  {children}
+
+                  {pageMeta.footer ?
+                    <Footer url={ APP_URL }/>
+                  : null}
             </section>
 
         </motion.div>
