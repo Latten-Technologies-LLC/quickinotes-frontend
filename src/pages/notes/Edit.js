@@ -19,10 +19,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 
-let didInit = false;
-
 export default function EditNote() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
 
   // TinyMCE
   const editorRef = useRef(null);
@@ -40,19 +39,17 @@ export default function EditNote() {
 
   // Get note data through API
   useEffect(() => {
-    if(!didInit) {
-      http.get("/notes/" + id + "?populate=*").then((response) => 
+    http.get("/notes/" + id + "?populate=*").then((response) => 
+    {
+      if(response.status === 200)
       {
-        if(response.status === 200)
-        {
-          setNote(response.data.data.attributes);
-          didInit = true;
-        }
-      }).catch((err) => {
-        navigate('/notes');
-      });
-    }
-  }, [id]);
+        setNote(response.data.data.attributes);
+        setLoading(false);
+      }
+    }).catch((err) => {
+      navigate('/notes');
+    });
+  }, []);
 
   // Edit note
   const editNote = async (e) => {
@@ -87,7 +84,7 @@ export default function EditNote() {
   let currentUser = user?.id;
 
   // Authenticated?
-  if (!isAuthenticated() || author != currentUser) {
+  if (!isAuthenticated() || author != currentUser && loading) {
     return <NotFound />;
   }
 

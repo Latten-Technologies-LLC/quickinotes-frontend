@@ -23,8 +23,6 @@ import NotFound from '../messages/NotFound';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 
-let didInit = false;
-
 export default function ViewNote() {
   // Authentication
   const navigate = useNavigate()
@@ -33,16 +31,19 @@ export default function ViewNote() {
   // Get note data
   const { id } = useParams();
   const [note, setNote] = useState({});
+  const [loading, setLoading] = useState(true);
 
   // Get note data through API
-  http.get("/notes/" + id + "?populate=*").then((response) => {
-    if (response.status === 200) {
-      setNote(response.data.data.attributes);
-      didInit = true;
-    }
-  }).catch((err) => {
-    navigate('/notes');
-  });
+  useEffect(() => {
+    http.get("/notes/" + id + "?populate=*").then((response) => {
+      if (response.status === 200) {
+        setNote(response.data.data.attributes);
+        setLoading(false);
+      }
+    }).catch((err) => {
+      navigate('/notes');
+    });
+  }, []);
 
   // Fix dates
   let created = moment(note.createdAt).format("MMM Do YYYY");
@@ -57,7 +58,7 @@ export default function ViewNote() {
   let status = note?.draft ? "Draft" : "Published";
 
   // Check auth and ownership
-  if (!isAuthenticated() || author != currentUser && !didInit) {
+  if (!isAuthenticated() || author != currentUser && loading) {
     //return <NotFound />;
     navigate('/auth/signin');
   }

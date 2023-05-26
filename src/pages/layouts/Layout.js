@@ -37,9 +37,15 @@ const Layout = ({pageMeta, children}) => {
               <Sidebar token={getToken()}/>
 
               <section className='website-inner'>
-                  <Header pageMeta={pageMeta} token={getToken()}/>
+                  {pageMeta.header ? 
+                    <Header pageMeta={pageMeta} token={getToken()}/>
+                  : null}
+                  
                   {children}
-                  <Footer url={ APP_URL }/>
+
+                  {pageMeta.footer ?
+                    <Footer url={ APP_URL }/>
+                  : null}
               </section>
 
           </motion.div>
