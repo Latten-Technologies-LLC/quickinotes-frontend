@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/AuthContext";
 
 // Layouts
 import NotFound from '../messages/NotFound';
-import AuthLayout from '../layouts/Layout'
+import AuthLayout from '../layouts/AuthLayout'
 
 // Moment js
 import moment from 'moment';
@@ -15,20 +15,13 @@ import moment from 'moment';
 // Tinymce
 import { Editor } from '@tinymce/tinymce-react';
 
-let didInit = false;
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 
 export default function EditNote() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
-
-  if(loading)
-  {
-    // Blur the page
-    document.body.style.filter = "blur(15px)";
-  }else{
-    // Unblur the page
-    document.body.style.filter = "none";
-  }
 
   // TinyMCE
   const editorRef = useRef(null);
@@ -46,20 +39,17 @@ export default function EditNote() {
 
   // Get note data through API
   useEffect(() => {
-    if(!didInit) {
-      http.get("/notes/" + id + "?populate=*").then((response) => 
+    http.get("/notes/" + id + "?populate=*").then((response) => 
+    {
+      if(response.status === 200)
       {
-        if(response.status === 200)
-        {
-          setNote(response.data.data.attributes);
-          didInit = true;
-          setLoading(false);
-        }
-      }).catch((err) => {
-        navigate('/notes');
-      });
-    }
-  }, [id]);
+        setNote(response.data.data.attributes);
+        setLoading(false);
+      }
+    }).catch((err) => {
+      navigate('/notes');
+    });
+  }, []);
 
   // Edit note
   const editNote = async (e) => {
@@ -71,8 +61,18 @@ export default function EditNote() {
     const noteData = {
       data: {
         note_name,
-        note_body
+        note_body,
+        draft: false
       }
+    }
+
+    const response = await http.put("/notes/" + id, noteData);
+
+    if(response.status === 200)
+    {
+      navigate('/notes/v/' + id);
+    }else{
+      alert("Something went wrong");
     }
   }
 
@@ -84,12 +84,12 @@ export default function EditNote() {
   let currentUser = user?.id;
 
   // Authenticated?
-  if (!isAuthenticated() || author != currentUser) {
+  if (!isAuthenticated() || author != currentUser && loading) {
     return <NotFound />;
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'View Note' }}>
+    <AuthLayout pageMeta={{ title: 'Edit Note' }}>
       <form onSubmit={editNote} method='PUT'>
         <div className='page page-notes-head'>
           <div className='page-notes-head-title container'>

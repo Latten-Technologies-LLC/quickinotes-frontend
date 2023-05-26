@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { API_URL, APP_ENV } from "../config/const";
-import Layout from './layouts/Layout';
+import React, {useState} from 'react';
+import { APP_ENV } from "../config/const";
 
-// React router
-import { useNavigate } from "react-router-dom";
+// Layouts
+import NotFound from './messages/NotFound';
+import AuthLayout from './layouts/AuthLayout'
+
+import { isAuthenticated } from '../utils/Auth';
 
 // Antd
-import { Alert, Button, Card, Col, Form, Input, message, Row, Spin, Typography, } from "antd";
+import { Form, Input, message } from "antd";
 
 // Auth
 import { useAuthContext } from "../context/AuthContext";
 import { http } from "../helpers/http";
-import { getToken } from "../helpers/tokens";
 
 export default function Settings() {
-  const headers = { Authorization: `Bearer ${getToken()}` };
-  const [loading, setLoading] = useState(false);
-  const { user, isLoading, setUser } = useAuthContext();
+  const { user, setUser } = useAuthContext();
+
+  const [username, setUsername] = useState(user?.username);
+  const [email, setEmail] = useState(user?.email);
+  const [name, setName] = useState(user?.name);
 
   /**
    * Handle Profile Update API Call
@@ -26,16 +29,10 @@ export default function Settings() {
    * @param {*} data 
    */
   const handleProfileUpdateApiCall = async (data) => {
-    setLoading(true);
 
     try {
       // Make call to API
-      const responseData = await http.put(`/users/${user.id}`, data, { headers });
-
-      if(APP_ENV === 'development') {
-        console.log('responseData: ');
-        console.log(responseData);
-      }
+      const responseData = await http.put(`/users/${user.id}`, data);
 
       setUser(responseData.data);
       message.success("Data saved successfully!");
@@ -44,29 +41,30 @@ export default function Settings() {
         console.log(error);
       }
       message.error("Error While Updating the Profile!");
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
-  if (isLoading) {
-    return <Spin size="large" />;
+  console.log(username, email, name);
+
+  if (!isAuthenticated()) {
+    return <NotFound />;
   }
 
   return (
-      <Layout pageMeta={{title: "Settings"}}>
+      <AuthLayout pageMeta={{title: "Settings"}}>
           <div className='page-settings'>
-            <div className='page-settings-inner container-fluid'>
+            <div className='page-settings-inner container'>
+                <h1>Settings</h1>
                 <div className='page-settings-row'>
                 <Form layout="vertical"
                     initialValues={{
-                      username: user?.username,
-                      email: user?.email,
-                      name: user?.name,
+                      username: username,
+                      email: email,
+                      name: name,
                     }}
                     onFinish={handleProfileUpdateApiCall}
                   >                    
-                  <Form.Item label="Name" name="name"
+                  <Form.Item label="Name" name="name" 
                       rules={[
                         {
                           required: true,
@@ -75,7 +73,7 @@ export default function Settings() {
                         },
                       ]}
                     >
-                    <Input placeholder="Email" />
+                    <Input placeholder="Name" />
                   </Form.Item>                     
                   <Form.Item label="Username" name="username"
                       rules={[
@@ -86,7 +84,7 @@ export default function Settings() {
                         },
                       ]}
                     >
-                    <Input placeholder="Email" />
+                    <Input placeholder="Username" />
                   </Form.Item>                     
                   <Form.Item label="Email" name="email"
                       rules={[
@@ -104,6 +102,6 @@ export default function Settings() {
                 </div>
             </div>
           </div>
-      </Layout>
+      </AuthLayout>
   )
 }

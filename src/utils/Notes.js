@@ -13,6 +13,13 @@ import { http } from '../helpers/http';
 
 import { message, } from "antd";
 
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
+
+// Framer motion
+import { motion } from 'framer-motion';
+
 /**
  * FetchNotes
  * Type: GET
@@ -202,8 +209,17 @@ export function Note({ note, checkBookmarked }) {
     let created = moment(note.createdAt).format("MMM Do YYYY");
     let updated = moment(note.updatedAt).fromNow();
 
+    // Variants
+    const v = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1
+        }
+    };
+
     return (
-        <div className='note' key={note.id}>
+        <motion.div className='note' key={note.id} variants={v}>
             <div className='note-header'>
                 <h6>{note.note_name}</h6>
                 <p>{created} - {note.draft == true ? "Draft" : "Saved"}</p>
@@ -216,11 +232,11 @@ export function Note({ note, checkBookmarked }) {
                 <div className='note-body-actions'>
                     <div className='note-body-actions-btns'>
                         <a onClick={routeToNoteView} className='btn btn-round' href={`/notes/v/${id}`} alt="View Note">View</a>
-                        <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`} title="View Note" alt="View Note"><i className="fa-solid fa-star"></i></a>
-                        <a onClick={routeToNoteEdit} className='btn btn-round' href={`/notes/e/${id}`} alt="Edit Note"><i className="fa-solid fa-pen"></i></a>
+                        <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`} title="View Note" alt="View Note"><FontAwesomeIcon icon={Icons.faStar} /></a>
+                        <a onClick={routeToNoteEdit} className='btn btn-round' href={`/notes/e/${id}`} alt="Edit Note"><FontAwesomeIcon icon={Icons.faPen} /></a>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
