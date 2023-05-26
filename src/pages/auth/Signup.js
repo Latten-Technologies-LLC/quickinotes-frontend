@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { API_URL, APP_ENV } from "../../config/const";
 
 // React Router
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Antd
-import { Alert, Button, Card, Col, Form, Input, message, Row, Spin, Typography, } from "antd";
+import { Alert, Button, Form, Input, message,Spin, Typography, } from "antd";
 
 // Auth
 import { useAuthContext } from "../../context/AuthContext";
@@ -13,7 +13,7 @@ import { setToken, getToken } from "../../helpers/tokens";
 import { http } from "../../helpers/http";
 
 // Auth Layout
-import AuthLayout from "../layouts/AuthLayout";
+import Layout from "../layouts/Layout";
 
 const Signout = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const Signout = () => {
         setUser(data.user);
 
         message.success(`Welcome to Quickinotes, ${data.user.username}!`);
-        setTimeout(() => navigate("/notes"), 3000);
+        setTimeout(() => window.location.href = "/notes", 3000);
       }
     } catch (error) {
       if (APP_ENV === "development") {
@@ -72,7 +72,7 @@ const Signout = () => {
     }
   };
   return (
-      <AuthLayout pageMeta={{title: 'Sign In'}}>
+      <Layout pageMeta={{title: 'Sign In'}}>
         <div className='sign-in-main'>
           <div className='sign-in-main-inner'>
             <div className='sign-in-main-header'>
@@ -109,7 +109,7 @@ const Signout = () => {
             </div>
           </div>
         </div>
-      </AuthLayout>
+      </Layout>
   )
 }
 

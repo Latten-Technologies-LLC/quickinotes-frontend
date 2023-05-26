@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { API_URL, APP_ENV } from "../../config/const";
 
 // React Router
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Antd
-import { Alert, Button, Card, Col, Form, Input, message, Row, Spin, Typography, } from "antd";
+import { Button, Form, Input, message,  Spin, Typography, } from "antd";
 
 // Auth
 import { useAuthContext } from "../../context/AuthContext";
-import { setToken, getToken } from "../../helpers/tokens";
-import { http } from "../../helpers/http";
+import { setToken } from "../../helpers/tokens";
 
 // Auth Layout
-import AuthLayout from "../layouts/AuthLayout";
+import Layout from "../layouts/Layout";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -57,7 +56,7 @@ const Signin = () => {
 
         message.success(`Welcome back ${data.user.username}!`);
 
-        navigate("/notes", { replace: true });
+        window.location.href = "/notes";
       }
     } catch (error) {
       console.error(error);
@@ -67,7 +66,7 @@ const Signin = () => {
     }
   };
   return (
-      <AuthLayout pageMeta={{title: 'Sign In'}}>
+      <Layout pageMeta={{title: 'Sign In'}}>
         <div className='sign-in-main'>
           <div className='sign-in-main-inner'>
             <div className='sign-in-main-header'>
@@ -106,7 +105,7 @@ const Signin = () => {
             </div>
           </div>
         </div>
-      </AuthLayout>
+      </Layout>
   )
 }
 
