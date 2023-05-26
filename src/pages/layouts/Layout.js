@@ -7,9 +7,6 @@ import { getToken } from '../../helpers/tokens'
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 
-// Import framer-motion
-import { motion } from "framer-motion";
-
 // Import .ENV vars
 import { APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHARSET, APP_VIEWPORT } from '../../config/const';
 import Sidebar from '../templates/Sidebar';
@@ -29,20 +26,15 @@ const Layout = ({pageMeta, children}) => {
             <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-lc-white-solid.png" />
             <script src="https://kit.fontawesome.com/0a79c5bf9a.js" crossorigin="anonymous"></script>
         </Helmet>
-        <div className='non-auth-website-main'>
-        <motion.div className='website' initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1 }} >
-              <Sidebar token={getToken()}/>
+        <div className='website'>
+            <Sidebar token={getToken()}/>
 
-              <section className='website-inner'>
-                  <Header pageMeta={pageMeta} token={getToken()}/>
-                  {children}
-                  <Footer url={ APP_URL }/>
-              </section>
+            <section className='website-inner'>
+                <Header pageMeta={pageMeta} token={getToken()}/>
+                {children}
+                <Footer url={ APP_URL }/>
+            </section>
 
-          </motion.div>
         </div>
     </HelmetProvider>
   )

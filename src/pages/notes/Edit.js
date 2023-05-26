@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/AuthContext";
 
 // Layouts
 import NotFound from '../messages/NotFound';
-import AuthLayout from '../layouts/AuthLayout'
+import AuthLayout from '../layouts/Layout'
 
 // Moment js
 import moment from 'moment';
@@ -15,14 +15,20 @@ import moment from 'moment';
 // Tinymce
 import { Editor } from '@tinymce/tinymce-react';
 
-// Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as Icons from '@fortawesome/free-solid-svg-icons'
-
 let didInit = false;
 
 export default function EditNote() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
+
+  if(loading)
+  {
+    // Blur the page
+    document.body.style.filter = "blur(15px)";
+  }else{
+    // Unblur the page
+    document.body.style.filter = "none";
+  }
 
   // TinyMCE
   const editorRef = useRef(null);
@@ -47,6 +53,7 @@ export default function EditNote() {
         {
           setNote(response.data.data.attributes);
           didInit = true;
+          setLoading(false);
         }
       }).catch((err) => {
         navigate('/notes');
@@ -64,8 +71,7 @@ export default function EditNote() {
     const noteData = {
       data: {
         note_name,
-        note_body,
-        draft: false
+        note_body
       }
     }
 
@@ -92,7 +98,7 @@ export default function EditNote() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'Edit Note' }}>
+    <AuthLayout pageMeta={{ title: 'View Note' }}>
       <form onSubmit={editNote} method='PUT'>
         <div className='page page-notes-head'>
           <div className='page-notes-head-title container'>
