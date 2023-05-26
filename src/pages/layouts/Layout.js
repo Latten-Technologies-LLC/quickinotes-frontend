@@ -11,7 +11,7 @@ import Footer from '../templates/Footer';
 import { motion } from "framer-motion";
 
 // Import .ENV vars
-import { APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHARSET, APP_VIEWPORT } from '../../config/const';
+import { APP_ENV, APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHARSET, APP_VIEWPORT } from '../../config/const';
 import Sidebar from '../templates/Sidebar';
 
 const Layout = ({pageMeta, children}) => {
@@ -19,7 +19,11 @@ const Layout = ({pageMeta, children}) => {
     <HelmetProvider>
         <Helmet>
             <title>{ ` ${ pageMeta.title } - ${ APP_TITLE }  `}</title>
-
+            {APP_ENV === "development" ? <meta name="robots" content="noindex, nofollow" /> : null}
+            {APP_ENV === "development" ? <meta name="googlebot" content="noindex, nofollow" /> : null}
+            {APP_ENV === "development" ? <meta name="bingbot" content="noindex, nofollow" /> : null}
+            {APP_ENV !== "development" ? <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2085234864180580"
+     crossorigin="anonymous"></script> : null}
             <meta charset={ APP_CHARSET } />
             <meta name="description" content={ APP_DESCRIPTION } />
             <meta name="keywords" content={ APP_KEYWORDS} />
