@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
+// Bootstrap
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss'
+import './fontawesome/css/fontawesome.min.css'
 
 import { AuthProvider } from './providers/AuthProvider';
 import { BrowserRouter } from 'react-router-dom';

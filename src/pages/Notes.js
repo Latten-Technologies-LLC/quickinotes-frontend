@@ -5,9 +5,12 @@ import { isAuthenticated } from '../utils/Auth';
 
 // Layouts
 import NotFound from './messages/NotFound';
-import AuthLayout from './layouts/Layout'
+import AuthLayout from './layouts/AuthLayout'
 
 import { FetchNotes, Note } from '../utils/Notes'
+
+// Page transitions
+import { motion } from "framer-motion";
 
 export default function Notes() {
   const navigate = useNavigate()
@@ -17,8 +20,21 @@ export default function Notes() {
   // Fetch all notes
   const notes = FetchNotes(user);
 
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   if (!isAuthenticated()) {
-    return <NotFound />;
+    //return <NotFound />;
+    navigate('/auth/signin');
   }
 
   return (
@@ -35,11 +51,13 @@ export default function Notes() {
               </ul>
             </div>
           </div>
-          <div className='page-timeline-all-notes'>
+          <motion.div className='page-timeline-all-notes' variants={container}
+    initial="hidden"
+    animate="visible" >
             {notes?.map((note, key) => (
               <Note key={key} note={note} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </AuthLayout>
