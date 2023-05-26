@@ -1,2 +1,0 @@
-// Hello
-alert("Hello World!");
