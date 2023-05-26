@@ -7,13 +7,17 @@ import { useAuthContext } from "../../context/AuthContext";
 
 // Layouts
 import NotFound from '../messages/NotFound';
-import AuthLayout from '../layouts/Layout'
+import AuthLayout from '../layouts/AuthLayout'
 
 // Moment js
 import moment from 'moment';
 
 // Tinymce
 import { Editor } from '@tinymce/tinymce-react';
+
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 
 let didInit = false;
 
@@ -28,7 +32,7 @@ export default function EditNote() {
     }
   };
 
-  const { user, isLoading, setUser } = useAuthContext();
+  const { user } = useAuthContext();
 
   // Get note data
   const { id } = useParams();
@@ -37,7 +41,7 @@ export default function EditNote() {
   // Get note data through API
   useEffect(() => {
     if(!didInit) {
-      http.get("http://localhost:1337/api/notes/" + id + "?populate=*").then((response) => 
+      http.get("/notes/" + id + "?populate=*").then((response) => 
       {
         if(response.status === 200)
         {
@@ -60,8 +64,18 @@ export default function EditNote() {
     const noteData = {
       data: {
         note_name,
-        note_body
+        note_body,
+        draft: false
       }
+    }
+
+    const response = await http.put("/notes/" + id, noteData);
+
+    if(response.status === 200)
+    {
+      navigate('/notes/v/' + id);
+    }else{
+      alert("Something went wrong");
     }
   }
 
@@ -78,7 +92,7 @@ export default function EditNote() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'View Note' }}>
+    <AuthLayout pageMeta={{ title: 'Edit Note' }}>
       <form onSubmit={editNote} method='PUT'>
         <div className='page page-notes-head'>
           <div className='page-notes-head-title container'>
@@ -111,11 +125,6 @@ export default function EditNote() {
                   init={{
                     height: 400,
                     menubar: true,
-                    plugins: [
-                      'advlist autolink lists link image charmap print preview anchor',
-                      'searchreplace visualblocks code fullscreen',
-                      'insertdatetime media table paste code help wordcount'
-                    ],
                     toolbar: 'undo redo | formatselect | format ' +
                       'bold italic backcolor | alignleft aligncenter ' +
                       'alignright alignjustify | bullist numlist outdent indent | ' +
@@ -124,7 +133,7 @@ export default function EditNote() {
                   }}
                 />
                 <div className='page-notes-view-note-content-actions'>
-                  <button type="submit" className="btn btn-round">Save</button>
+                  <input type="submit" className="btn btn-round" value="Save" />
                 </div>
               </div>
             </div>

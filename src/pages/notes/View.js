@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { isAuthenticated } from '../../utils/Auth';
 import { useNavigate, useParams } from 'react-router-dom'
 import { http } from '../../helpers/http';
@@ -19,32 +19,30 @@ import rehypeRaw from 'rehype-raw'
 
 import NotFound from '../messages/NotFound';
 
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
+
 let didInit = false;
 
 export default function ViewNote() {
   // Authentication
   const navigate = useNavigate()
-  const { user, isLoading, setUser } = useAuthContext();
+  const { user } = useAuthContext();
 
   // Get note data
   const { id } = useParams();
   const [note, setNote] = useState({});
 
   // Get note data through API
-  useEffect(() => {
-    if(!didInit) {
-      http.get("http://localhost:1337/api/notes/" + id + "?populate=*").then((response) => 
-      {
-        if(response.status === 200)
-        {
-          setNote(response.data.data.attributes);
-          didInit = true;
-        }
-      }).catch((err) => {
-        navigate('/notes');
-      });
+  http.get("/notes/" + id + "?populate=*").then((response) => {
+    if (response.status === 200) {
+      setNote(response.data.data.attributes);
+      didInit = true;
     }
-  }, [id]);
+  }).catch((err) => {
+    navigate('/notes');
+  });
 
   // Fix dates
   let created = moment(note.createdAt).format("MMM Do YYYY");
@@ -56,9 +54,12 @@ export default function ViewNote() {
   let author = note.user?.data.id;
   let currentUser = user?.id;
 
+  let status = note?.draft ? "Draft" : "Published";
+
   // Check auth and ownership
-  if (!isAuthenticated() || author != currentUser) {
-    return <NotFound />;
+  if (!isAuthenticated() || author != currentUser && !didInit) {
+    //return <NotFound />;
+    navigate('/auth/signin');
   }
 
   return (
@@ -69,12 +70,12 @@ export default function ViewNote() {
           <ul>
             <li>{created}</li>
             <li>Last updated {updated}</li>
-            <li>4 min read</li>
+            <li>{status}</li>
           </ul>
           <div className='page-notes-head-actions'>
             <a onClick={routeToNoteEdit(note.id)} className='btn btn-round' alt="Edit Note" href={`/notes/e/${id}`}>Edit</a>
-            <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`}><i className="fa-solid fa-star"></i></a>
-            <a onClick={deleteNote} data-id={id} className='btn btn-round delete' href={`/notes/e/${id}`} alt="Delete Note"><i className="fa-solid fa-trash"></i></a>
+            <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`}><FontAwesomeIcon icon={Icons.faStar} /></a>
+            <a onClick={deleteNote} data-id={id} className='btn btn-round delete' href={`/notes/e/${id}`} alt="Delete Note"><FontAwesomeIcon icon={Icons.faTrash} /></a>
           </div>
         </div>
       </div>
