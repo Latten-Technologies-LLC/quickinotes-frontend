@@ -14,63 +14,65 @@ $accent-1: #C7EBB3;
 $accent-2: #F4DFCD;
 
 // Reset
-* {
+*{
     font-family: 'Poppins', monospace;
 }
 
-body {
+body{
     background: $background;
     margin: 0;
     padding: 0;
 }
 
-h1 {
+h1{
     font-size: 3.0em;
     font-weight: 600;
 }
 
-h2 {
+h2{
     font-size: 2.5em;
     font-weight: 600;
 }
 
-h3 {
+h3{
     font-size: 2.0em;
     font-weight: 600;
 }
 
-h4 {
+h4{
     font-size: 1.5em;
     font-weight: 600;
 }
 
-h5 {
+h5{
     font-size: 1.2em;
     font-weight: 600;
 }
 
-h6 {
+h6{
     font-size: 1.0em;
     font-weight: 600;
 }
 
-p {}
+p{
+
+}
 
 // Website inner
-.website-inner {
+.website-inner{
     height: 100vh;
 
     background: $background-light;
 }
 
 // Auth Website inner
-.auth-website-inner {
+.auth-website-inner{
     background: $background-light;
     min-height: 100vh;
 }
 
 // Buttons
-.btn {
+.btn{
     font-weight: bold;
     margin-right: 15px;
 
@@ -86,7 +88,7 @@ p {}
     color: #ffffff;
     border: 2px solid #000000;
 
-    span {
+    span{
         padding-left: 3px;
         margin-top: -3px;
 
@@ -103,58 +105,19 @@ p {}
     background: white;
 }
 
-.btn-round {
+.btn-round{
     border-radius: 28px;
 }
 
-.btn-active {
+.btn-active{
     background: #ffffff;
     color: $font-color;
 
     border: 2px solid $font-color;
 }
 
-// Website containers
-.non-auth-website-main {
-
-    background-image: url('http://localhost:3000/images/background/background_3.jpg');
-    background-size: cover;
-
-    .website {
-        background: rgba(0, 0, 0, .5);
-
-        .website-inner {
-            background: transparent;
-        }
-    }
-}
-
-// Unlogged header
-.unlogged {
-
-    .header-inner {
-
-        .header-row {
-
-            .header-menu-action {
-
-                .header-menu-action-inner {
-
-                    h2 {
-
-                        a {
-                            text-decoration: none;
-                            color: #fff !important;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 // Header
-.header {
+.header{
     background: transparent;
     height: 80px;
 
@@ -163,19 +126,19 @@ p {}
             padding: 0px 30px;
         }
 
-        .header-row {
+        .header-row{
 
-            .header-menu-action {
+            .header-menu-action{
                 padding-left: 0px;
 
-                .header-menu-action-inner {
+                .header-menu-action-inner{
                     padding: 10px;
                     padding-top: 15px;
 
                     padding-left: 0px;
 
-                    button {
-                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                    button{
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                         background: #000;
                         color: white;
                         outline: none;
@@ -187,48 +150,46 @@ p {}
                         transition: all 0.2s ease-in-out;
                     }
 
-                    button:hover {
+                    button:hover{
                         cursor: pointer;
                     }
 
-                    button.header-menu-action-inner-button-active {
+                    button.header-menu-action-inner-button-active{
                         background: #fff;
                         color: #000;
                         transition: all 0.2s ease-in-out;
                     }
 
-                    h2 {
-                        font-size: 1.3em;
+                    h2{
+                        font-size: 2.0em;
                         font-weight: 400;
-
+                        
                         position: relative;
-                        top: 2px;
+                        top: 5px;
                         left: 15px;
 
                         margin: 0px;
                         padding: 0px;
-
+    
+                        color: #333;
+    
                         text-align: left;
 
                         display: inline-block;
 
-                        background: #000;
-                        padding: 10px 20px;
-                        border-radius: 5px;
-
-                        a {
+                        a{
                             text-decoration: none;
-                            color: #fff;
+                            color: $font-color;
                         }
                     }
                 }
             }
 
-            .header-interactions {
+            .header-interactions{
 
-                .header-search {
+                .header-search{
                     padding-top: 20px;
-                    padding-right: 5px;
+                    padding-right:5px;
 
                     .header-links {
                         text-align: right;
@@ -254,28 +215,28 @@ p {}
                             display: none;
                         }
                         border: none;
-                        border-radius: 6px;
+                        border-radius:6px;
                         padding: 5px;
                         padding-left: 15px;
                         width: 180px;
 
                         float: right;
 
-                        background: rgba(0, 0, 0, .2);
+                        background: rgba(0,0,0,.2);
 
                         transition: all 0.2s ease-in-out;
                     }
 
-                    input::placeholder {
+                    input::placeholder{
                         color: white;
                     }
 
-                    input:focus {
+                    input:focus{
                         background: white;
                         outline: none;
                     }
 
-                    input:focus::placeholder {
+                    input:focus::placeholder{
                         color: #333;
                     }
 
@@ -286,10 +247,8 @@ p {}
 }
 
 // Footer
-.footer {
-    margin-top: 40px;
+.footer{
     padding: 20px;
-    background: rgba(0, 0, 0, .4);
 
     position: absolute;
     bottom: 0px;
@@ -311,7 +270,7 @@ p {}
 }
 
 // Sidebar
-.sidebar.sidebar-active {
+.sidebar.sidebar-active{
     display: block;
     transition: all 0.2s ease-in-out;
 }
@@ -326,74 +285,74 @@ p {}
     width: 225px;
 
     border-radius: 5px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
     position: fixed;
     left: 45px;
     top: 80px;
 
-    z-index: 100001;
-
     display: none;
 
-    .sidebar-inner {
+    .sidebar-inner{
 
-        .sidebar-top {
+        .sidebar-top{
             min-height: 100px;
             padding: 15px;
 
             text-align: center;
 
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
 
-            h2 {}
+            h2{
 
-            h4 {
+            }
+
+            h4{
                 font-size: 1em;
-                text-align: center;
+                text-align:center;
                 font-weight: 600;
             }
         }
 
-        .sidebar-middle {
+        .sidebar-middle{
 
             padding: 20px;
 
-            .sidebar-middle-item {
+            .sidebar-middle-item{
 
-                .btn {
+                .btn{
                     width: 100%;
                     margin-bottom: 10px;
 
-                    i {
+                    i{
                         position: relative;
-                        top: 1px;
+                        top:1px;
                     }
                 }
 
-                .sidebar-middle-item-user {
-                    padding: 35px;
-                    padding-top: 10px;
+                .sidebar-middle-item-user{
+                   padding: 35px;
+                   padding-top: 10px;
 
 
-                    ul {
+                    ul{
                         padding: 0px;
                         margin: 0px;
 
-                        li {
+                        li{
                             color: #333;
                             font-size: 1.2em;
 
                             padding-bottom: 10px;
 
-                            span {
+                            span{
 
-                                i {
+                                i{
                                     font-size: .8em;
                                 }
                             }
 
-                            a {
+                            a{
                                 color: #333;
                                 text-decoration: none;
 
@@ -406,25 +365,25 @@ p {}
             }
         }
 
-        .sidebar-bottom {
+        .sidebar-bottom{
 
-            width: 225px;
+            width:225px;
 
             padding: 20px;
 
-            .sidebar-bottom-item {
+            .sidebar-bottom-item{
 
-                .sidebar-bottom-item-user {
-                    padding: 25px;
+                .sidebar-bottom-item-user{
+                   padding: 25px;
 
-                    ul {
+                    ul{
                         padding: 0px;
                         margin: 0px;
 
-                        li {
+                        li{
                             color: #333;
 
-                            a {
+                            a{
                                 color: #333;
                                 text-decoration: none;
                                 font-weight: 600;
@@ -434,9 +393,9 @@ p {}
                     }
                 }
 
-                .sidebar-bottom-item-signout {
+                .sidebar-bottom-item-signout{
 
-                    button {
+                    button{
                         text-decoration: none;
                         color: #333;
 
@@ -459,7 +418,7 @@ p {}
 }
 
 // Page frontend logic
-.page {
+.page{
     padding-top: 50px;
 }
 
@@ -470,25 +429,25 @@ p {}
         padding-top: 15px;
     }
 
-    .page-notes-head-title {
+    .page-notes-head-title{
         border-bottom: 1px solid #aaa;
         padding: 0px;
 
-        h1:first-child {
+        h1:first-child{
             font-size: 3em;
             padding-bottom: 30px;
         }
 
-        h1 {
+        h1{
             font-weight: 400;
             font-size: 2.5em;
 
-            span {
+            span{
                 font-size: .5em;
                 font-weight: 400;
             }
 
-            input {
+            input{
                 width: 100%;
                 padding: 10px;
                 padding-left: 15px;
@@ -499,12 +458,12 @@ p {}
             }
         }
 
-        ul {
+        ul{
             margin: 0px;
             padding: 0px;
             margin-bottom: 15px;
 
-            li {
+            li{
                 display: inline-block;
                 padding-right: 25px;
                 color: rgb(107 114 128/1);
@@ -513,43 +472,43 @@ p {}
             }
         }
 
-        .page-notes-head-actions {
+        .page-notes-head-actions{
             width: fit-content;
             border-radius: 32px;
 
             margin-top: 35px;
             margin-bottom: 15px;
 
-            a {
-                background: #000000;
-                color: #ffffff;
+                a{
+                    background: #000000;
+                    color: #ffffff;
 
-                border: 2px solid transparent;
+                    border: 2px solid transparent;
 
-                font-weight: 400;
+                    font-weight: 400;
 
-                border-radius: 28px;
+                    border-radius: 28px;
 
-            }
+                }
 
-            a:hover {
-                background: #ffffff;
-                color: $font-color;
-                border: 2px solid $font-color;
-            }
+                a:hover{
+                    background: #ffffff;
+                    color: $font-color;
+                    border: 2px solid $font-color;
+                }
 
-            a:last-child {
-                margin-right: 0px;
-            }
+                a:last-child{
+                    margin-right: 0px;
+                }
 
-            a.bookmark-active {
-                color: #feba57;
-            }
+                a.bookmark-active{
+                    color: #feba57;
+                }
         }
     }
 }
 
-.page-notes-view {
+.page-notes-view{
 
     .page-notes-view-inner {
         @media screen and (max-width: 768px) {
@@ -557,17 +516,17 @@ p {}
         }
         padding: 0px;
 
-        .page-notes-view-note {
+        .page-notes-view-note{
             background: $primary-color;
 
             border-radius: 5px;
 
-            .page-notes-view-note-title {
+            .page-notes-view-note-title{
                 padding-bottom: 10px;
 
-                h1 {
+                h1{
 
-                    input {
+                    input{
                         width: 100%;
                         padding-left: 5px;
 
@@ -576,19 +535,19 @@ p {}
                     }
                 }
 
-                h2 {
+                h2{
 
-                    input {
+                    input{
                         width: 100%;
                         padding-left: 5px;
                     }
                 }
 
-                ul {
+                ul{
                     padding: 0px;
                     margin: 0px;
 
-                    li {
+                    li{
                         display: inline;
                         margin-right: 15px;
 
@@ -597,32 +556,34 @@ p {}
                 }
             }
 
-            .page-notes-view-note-actions {
+            .page-notes-view-note-actions{
                 margin-top: 15px;
                 border-top: 2px solid #eee;
                 padding-top: 15px;
 
-                button {
+                button{
                     margin-right: 15px;
                 }
             }
 
-            .page-notes-view-note-content {
+            .page-notes-view-note-content{
                 padding-top: 10px;
 
-                p {
-                    img {
+                p{
+                    img{
                         max-width: 50%;
                         display: block;
                         padding-bottom: 15px;
                     }
                 }
 
-                .page-notes-view-note-content-actions {
+                .page-notes-view-note-content-actions{
                     padding-top: 15px;
                     margin-top: 20px;
 
-                    button {}
+                    button{
+
+                    }
                 }
             }
         }
@@ -630,31 +591,24 @@ p {}
 }
 
 // Page: Settings
-.page-settings {
+.page-settings{
 
-    .page-settings-inner {
-        padding: 0px 00px;
+    .page-settings-inner{
+        padding: 0px 20px;
 
-        h1 {
-            font-size: 3em;
-            font-weight: 400;
-            padding-bottom: 20px;
-            margin-top: 30px;
-        }
-
-        .page-settings-row {
+        .page-settings-row{
             background: $primary-color;
             padding: 20px;
 
             border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
         }
     }
 }
 
 // Page: Timeline
-.page-timeline {
+.page-timeline{
 
     .page-timeline-inner {
         @media screen and (max-width: 768px) {
@@ -662,8 +616,8 @@ p {}
         }
         padding: 0px 00px;
 
-        .page-timeline-header {
-            border-bottom: 1px solid rgba(0, 0, 0, .5);
+        .page-timeline-header{
+            border-bottom: 1px solid rgba(0,0,0,.5);
             margin-bottom: 15px;
 
             h2 {
@@ -680,24 +634,26 @@ p {}
                 line-break: strict;
             }
 
-            .page-timeline-header-actions {
+            .page-timeline-header-actions{
                 padding-bottom: 15px;
 
-                ul {
+                ul{
                     padding: 0px;
                     margin: 0px;
 
-                    li {
+                    li{
                         list-style: none;
                         display: inline-block;
 
-                        a {}
+                        a{
+
+                        }
                     }
                 }
             }
         }
 
-        .page-timeline-all-notes {
+        .page-timeline-all-notes{
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
@@ -730,25 +686,21 @@ p {}
     margin: auto;
 
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border: 1px solid #eee;
 
-    height: auto;
-
-    margin-bottom: 150px;
-
-    .sign-in-main-inner {
+    .sign-in-main-inner{
         padding: 50px 55px;
 
-        .sign-in-main-header {
+        .sign-in-main-header{
 
-            .sign-in-main-header-inner {
+            .sign-in-main-header-inner{
                 text-align: center;
                 border-bottom: 1px solid #aaa;
 
                 padding-bottom: 25px;
 
-                img {
+                img{
                     width: 150px;
                     border-radius: 5px;
                 }
@@ -771,7 +723,7 @@ p {}
             }
         }
 
-        .sign-in-main-body {
+        .sign-in-main-body{
             padding-top: 25px;
 
             .show-btns{
@@ -798,8 +750,8 @@ p {}
 }
 
 // Note componant
-.note {
-    background: #000;
+.note{
+    background: $accent-1;
     padding: 20px;
 
     border-radius: 15px;
@@ -807,65 +759,58 @@ p {}
 
     height: fit-content;
 
-    .note-header {
+    .note-header{
 
-        h6 {
-            color: white;
+        h6{
 
-        }
-
-        p {
-            color: white;
         }
     }
 
-    .note-body {
+    .note-body{
 
-        p {
+        p{
             font-size: .9em;
             padding-top: 10px;
             padding-bottom: 10px;
-
-            color: white;
         }
 
-        .note-body-tags {}
+        .note-body-tags{
 
-        .note-body-actions {
+        }
+
+        .note-body-actions{
             text-align: right;
 
-            .note-body-actions-date {
+            .note-body-actions-date{
                 font-size: 1em;
                 float: left;
                 align-self: baseline;
 
-                p {
+                p{
                     margin-bottom: 0px;
                     padding-bottom: 0px;
-
-                    color: white;
                 }
             }
 
-            .note-body-actions-btns {
+            .note-body-actions-btns{
                 text-align: left;
 
-                a {
-                    color: #000000;
-                    background: #ffffff;
+                a{
+                    background: #000000;
+                    color: #ffffff;
 
                 }
 
-                a:hover {
+                a:hover{
                     background: #ffffff;
                     color: $font-color
                 }
 
-                a:last-child {
+                a:last-child{
                     margin-right: 0px;
                 }
 
-                a.bookmark-active {
+                a.bookmark-active{
                     color: #feba57;
                 }
             }

@@ -11,9 +11,6 @@ import Sidebar from '../templates/Sidebar';
 // Import .ENV vars
 import { APP_ENV, APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHARSET, APP_VIEWPORT } from '../../config/const';
 
-// Import framer-motion
-import { motion } from "framer-motion";
-
 const AuthLayout = ({pageMeta, children}) => {
   return (
     <HelmetProvider>
@@ -32,13 +29,10 @@ const AuthLayout = ({pageMeta, children}) => {
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
-            <link rel="icon" type="image/png" href="/images/quickinotes-logo-favicon.png" />
             <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-lc-white-solid.png" />
+            <script src="https://kit.fontawesome.com/0a79c5bf9a.js" crossorigin="anonymous"></script>
         </Helmet>
-        <motion.div className='website' initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1 }} >
+        <div className='website'>
             <Sidebar token={getToken()}/>
 
             <section className='auth-website-inner'>
@@ -47,8 +41,7 @@ const AuthLayout = ({pageMeta, children}) => {
                 <Footer url={ APP_URL }/>
             </section>
 
-        </motion.div>
-        <script src='/js/script.js'></script>
+        </div>
     </HelmetProvider>
   )
 }
