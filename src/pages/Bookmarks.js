@@ -23,14 +23,14 @@ export default function Bookmarks() {
     const container = {
         hidden: { opacity: 1, scale: 0 },
         visible: {
-          opacity: 1,
-          scale: 1,
-          transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2
-          }
+            opacity: 1,
+            scale: 1,
+            transition: {
+                delayChildren: 0.3,
+                staggerChildren: 0.2
+            }
         }
-      };
+    };
 
     if (!isAuthenticated()) {
         //return <NotFound />;
@@ -52,11 +52,21 @@ export default function Bookmarks() {
                         </div>
                     </div>
                     <motion.div className='page-timeline-all-notes' variants={container}
-    initial="hidden"
-    animate="visible">
-                        {bookmarks?.map((note, key) => (
-                            <Note key={key} note={note} checkBookmarked='true' />
-                        ))}
+                        initial="hidden"
+                        animate="visible">
+                        {bookmarks?.length > 0 ?
+                            bookmarks?.map((note, key) => (
+                                <Note key={key} note={note} />
+                            ))
+                            :
+                            <div className='page-timeline-all-notes-empty'>
+                                <div className='page-timeline-all-notes-empty-inner'>
+                                    <h2>Nothing to see here</h2>
+                                    <p>When you create notes, they will show up here.</p>
+                                    <a className='btn btn-round' href="/notes/new">Create a note</a>
+                                </div>
+                            </div>
+                        }
                     </motion.div>
                 </div>
             </div>

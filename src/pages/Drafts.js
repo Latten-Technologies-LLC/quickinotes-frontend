@@ -54,9 +54,19 @@ export default function Drafts() {
           <motion.div className='page-timeline-all-notes' variants={container}
     initial="hidden"
     animate="visible">
-            {drafts?.map((note, key) => (
-              <Note key={key} note={note} />
-            ))}
+            {drafts?.length > 0 ? 
+              drafts?.map((note, key) => (
+                <Note key={key} note={note} />
+              ))
+            : 
+              <div className='page-timeline-all-notes-empty'>
+                <div className='page-timeline-all-notes-empty-inner'>
+                  <h2>Nothing to see here</h2>
+                  <p>When you create notes, they will show up here.</p>
+                  <a className='btn btn-round' href="/notes/new">Create a note</a>
+                </div>
+              </div>
+            }
           </motion.div>
         </div>
       </div>

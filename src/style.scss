@@ -56,6 +56,10 @@ h6 {
 
 p {}
 
+.adsbygoogle{
+    display: block;
+}
+
 // Website inner
 .website-inner {
     height: 100vh;
@@ -702,7 +706,7 @@ p {}
             flex-wrap: wrap;
             gap: 30px;
 
-            .note {
+            .note, .ad {
                 @media screen and (max-width: 768px) {
                     flex-basis: 100%;
                 }
@@ -798,7 +802,7 @@ p {}
 }
 
 // Note componant
-.note {
+.note, .ad {
     background: #000;
     padding: 20px;
 
@@ -868,6 +872,30 @@ p {}
                 a.bookmark-active {
                     color: #feba57;
                 }
+            }
+        }
+    }
+}
+
+// Ads
+.ad{
+    background: white;
+    border: 3px solid #111;
+
+    .ad-container{
+
+        .ad-header{
+
+            h1{
+                font-size: 1em;
+                font-weight: 600;
+
+                padding: 0px;
+                margin: 0px;
+            }
+
+            a{
+                text-decoration: underline;
             }
         }
     }
