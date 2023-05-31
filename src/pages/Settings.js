@@ -1,5 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { APP_ENV } from "../config/const";
+
+// Usenavigate
+import { useNavigate } from "react-router-dom";
 
 // Layouts
 import NotFound from './messages/NotFound';
@@ -21,6 +24,8 @@ export default function Settings() {
   const [email, setEmail] = useState(user?.email);
   const [name, setName] = useState(user?.name);
 
+  const navigate = useNavigate()
+
   /**
    * Handle Profile Update API Call
    * ----
@@ -34,74 +39,76 @@ export default function Settings() {
       // Make call to API
       const responseData = await http.put(`/users/${user.id}`, data);
 
+      if (APP_ENV === 'development') {
+        console.log(responseData);
+      }
       setUser(responseData.data);
       message.success("Data saved successfully!");
     } catch (error) {
-      if(APP_ENV === 'development') {
+      if (APP_ENV === 'development') {
         console.log(error);
       }
       message.error("Error While Updating the Profile!");
-    } 
+    }
   };
 
-  console.log(username, email, name);
-
-  if (!isAuthenticated()) {
-    return <NotFound />;
+  if (isAuthenticated() === false) {
+    //return <NotFound />;
+    navigate('/404');
   }
 
   return (
-      <AuthLayout pageMeta={{title: "Settings", footer: false, header: true}}>
-          <div className='page-settings'>
-            <div className='page-settings-inner container'>
-                <h1>Settings</h1>
-                <div className='page-settings-row'>
-                <Form layout="vertical"
-                    initialValues={{
-                      username: username,
-                      email: email,
-                      name: name,
-                    }}
-                    onFinish={handleProfileUpdateApiCall}
-                  >                    
-                  <Form.Item label="Name" name="name" 
-                      rules={[
-                        {
-                          required: true,
-                          message: "Name is required!",
-                          type: "text",
-                        },
-                      ]}
-                    >
-                    <Input placeholder="Name" />
-                  </Form.Item>                     
-                  <Form.Item label="Username" name="username"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Username is required!",
-                          type: "text",
-                        },
-                      ]}
-                    >
-                    <Input placeholder="Username" />
-                  </Form.Item>                     
-                  <Form.Item label="Email" name="email"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Email is required!",
-                          type: "email",
-                        },
-                      ]}
-                    >
-                    <Input placeholder="Email" />
-                  </Form.Item>                    
-                  <input type='submit' value='Update Profile' className='btn btn-primary' />
-                  </Form>
-                </div>
-            </div>
+    <AuthLayout pageMeta={{ title: "Settings", footer: false, header: true }}>
+      <div className='page-settings'>
+        <div className='page-settings-inner container'>
+          <h1>Settings</h1>
+          <div className='page-settings-row'>
+            <Form layout="vertical"
+              initialValues={{
+                username: username,
+                email: email,
+                name: name,
+              }}
+              onFinish={handleProfileUpdateApiCall}
+            >
+              <Form.Item label="Name" name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Name is required!",
+                    type: "text",
+                  },
+                ]}
+              >
+                <Input placeholder="Name" />
+              </Form.Item>
+              <Form.Item label="Username" name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Username is required!",
+                    type: "text",
+                  },
+                ]}
+              >
+                <Input placeholder="Username" />
+              </Form.Item>
+              <Form.Item label="Email" name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Email is required!",
+                    type: "email",
+                  },
+                ]}
+              >
+                <Input placeholder="Email" />
+              </Form.Item>
+              <input type='submit' value='Update Profile' className='btn btn-primary' />
+            </Form>
           </div>
-      </AuthLayout>
+        </div>
+      </div>
+    </AuthLayout>
   )
 }

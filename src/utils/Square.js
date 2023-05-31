@@ -13,10 +13,18 @@ import { http } from '../helpers/http';
 import { message, Modal, Button } from "antd";
 
 // Square
+import { Client } from 'square';
+import { randomUUID } from 'crypto';
+
 import { CreditCard, PaymentForm } from 'react-square-web-payments-sdk';
 
 // Square constants
-import { SQUARE_LOCATION_ID, SQUARE_ENVIROMENT, SQUARE_SANDBOX_APP_ID, SQUARE_SANDBOX_ACCESS_TOKEN, SQUARE_PRODUCTION_APP_ID, SQUARE_PRODUCTION_ACCESS_TOKEN } from '../config/const';
+import { SQUARE_LOCATION_ID, SQUARE_ENVIROMENT, SQUARE_SANDBOX_APP_ID, SQUARE_SANDBOX_ACCESS_TOKEN, SQUARE_PRODUCTION_APP_ID, SQUARE_PRODUCTION_ACCESS_TOKEN, APP_ENV } from '../config/const';
+
+const { paymentsApi } = new Client({
+    accessToken: SQUARE_SANDBOX_ACCESS_TOKEN,
+    environment: SQUARE_ENVIROMENT
+});
 
 /**
  * Square
@@ -72,7 +80,9 @@ export const SquareModal = () => {
         }, 2000);
     };
     const handleCancel = () => {
-        console.log('Clicked cancel button');
+        if(APP_ENV === 'development') {
+            console.log('Clicked cancel button');
+        }
         setOpen(false);
     };
 

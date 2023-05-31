@@ -11,6 +11,7 @@ import { FetchBookmarkedNotes, Note } from '../utils/Notes'
 
 // Page transitions
 import { motion } from "framer-motion";
+import { APP_ENV } from '../config/const';
 
 export default function Bookmarks() {
     const navigate = useNavigate()
@@ -19,6 +20,8 @@ export default function Bookmarks() {
 
     // Get bookmarks
     const bookmarks = FetchBookmarkedNotes(user);
+
+    if(APP_ENV === 'development') console.log(bookmarks);
 
     const container = {
         hidden: { opacity: 1, scale: 0 },
@@ -32,11 +35,11 @@ export default function Bookmarks() {
         }
     };
 
-    if (!isAuthenticated()) {
+    if (isAuthenticated() === false) {
         //return <NotFound />;
-        navigate('/auth/signin');
-
+        navigate('/404');
     }
+    
     return (
         <AuthLayout pageMeta={{ title: 'Bookmarks', footer: false, header: true }}>
             <div className='page-timeline'>

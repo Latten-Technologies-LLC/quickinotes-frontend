@@ -11,6 +11,7 @@ import { FetchDraftNotes, Note } from '../utils/Notes'
 
 // Page transitions
 import { motion } from "framer-motion";
+import { APP_ENV } from '../config/const';
 
 export default function Drafts() {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ export default function Drafts() {
 
   // Fetch all drafts
   var drafts = FetchDraftNotes();
+  if(APP_ENV === 'development') console.log(drafts);
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -32,9 +34,9 @@ export default function Drafts() {
     }
   };
 
-  if (!isAuthenticated()) {
+  if (isAuthenticated() === false) {
     //return <NotFound />;
-    navigate('/auth/signin');
+    navigate('/404');
   }
 
   return (

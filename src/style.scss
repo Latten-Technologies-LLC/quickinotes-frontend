@@ -257,6 +257,7 @@ p {}
                         @media screen and (max-width: 768px) {
                             display: none;
                         }
+                        display: none;
                         border: none;
                         border-radius: 6px;
                         padding: 5px;
@@ -715,6 +716,12 @@ p {}
             }
         }
     }
+}
+
+// Page: 404
+.page-404{
+    background: rgba(255, 255, 255, 0.9);
+    padding-bottom: 50px;
 }
 
 // Page: Sign In

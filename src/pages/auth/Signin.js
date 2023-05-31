@@ -66,7 +66,7 @@ const Signin = () => {
     }
   };
   return (
-      <Layout pageMeta={{title: 'Sign In'}}>
+      <Layout pageMeta={{title: 'Sign In', footer: true, header: true}}>
         <div className='sign-in-main'>
           <div className='sign-in-main-inner'>
             <div className='sign-in-main-header'>

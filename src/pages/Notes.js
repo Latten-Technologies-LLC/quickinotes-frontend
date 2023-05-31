@@ -38,10 +38,10 @@ export default function Notes() {
       }
     }
   };
-
-  if (!isAuthenticated()) {
-    //return <NotFound />;
-    navigate('/auth/signin');
+  
+  if (isAuthenticated() === null) {
+    return <NotFound />;
+    //navigate('/404');
   }
 
   return (
@@ -61,7 +61,8 @@ export default function Notes() {
           <motion.div className='page-timeline-all-notes' variants={container}
     initial="hidden"
     animate="visible" >
-            <DisplayAd />
+            { !user?.hideAds ? <DisplayAd show={{show: "false"}}/> : null }
+
             {notes?.length > 0 ? 
               notes?.map((note, key) => (
                 <Note key={key} note={note} />

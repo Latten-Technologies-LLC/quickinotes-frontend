@@ -7,28 +7,34 @@
 import { BEARER } from '../config/const';
 import { getToken } from '../helpers/tokens';
 import { http } from '../helpers/http';
+import { useEffect } from 'react';
 
-export function isAuthenticated() {
+export const isAuthenticated = () => {
     const token = getToken();
+
     if (token) {
         // We have a token, so we are authenticated, but let's check if it's expired
         const payload = JSON.parse(atob(token.split('.')[1]));
         if (payload.exp < Date.now() / 1000) {
             // Token has expired
-            return false;
         }
 
         // It's not expired, lets see if the token exists in the database
-        http.get("/users/me?populate=*", {
-            headers: { Authorization: `${BEARER} ${token}` },
-          }).then((response) => {
-            if (response.status === 200) {
+        const result = async () => {
+            await http.get("/users/me?populate=*", {
+                headers: { Authorization: `${BEARER} ${token}` },
+            }).then((response) => {
                 return true;
-            }
-        }).catch((err) => {
+            }).catch((err) => {
+                console.log(err);
+                return err;
+            });
+        };
+
+        if (result()) {
+            return true;
+        } else {
             return false;
-        });
-        return true;
+        }
     }
-    return false;
 }

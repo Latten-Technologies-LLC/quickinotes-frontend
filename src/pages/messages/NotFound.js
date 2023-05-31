@@ -3,6 +3,8 @@ import { getToken } from '../../helpers/tokens'
 import { useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from "../../context/AuthContext";
+import { isAuthenticated } from '../../utils/Auth';
+
 
 import Layout from '../layouts/Layout'
 import AuthLayout from '../layouts/AuthLayout';
@@ -13,14 +15,9 @@ export default function NotFound() {
 
   const { user, isLoading, setUser } = useAuthContext();
 
-  useEffect(() => {
-    if (getToken()) {
-      setAuthenticated(true)
-    }
-  }, [])
-
-  if(!authenticated) {
-    <Layout pageMeta={{title: '404 Not Found'}}>
+  if(isAuthenticated() === null) {
+    return (
+    <Layout pageMeta={{title: '404 Not Found', footer: true, header: true}}>
         <div className='page page-404'>
             <div className='page-404-inner container'>
                 <h1>404</h1>
@@ -30,9 +27,10 @@ export default function NotFound() {
             </div>
         </div>
     </Layout>
+    );
   } else{
     return (
-      <AuthLayout pageMeta={{title: '404 Not Found'}}>
+      <AuthLayout pageMeta={{title: '404 Not Found', footer: true, header: true }}>
         <div className='page page-404'>
             <div className='page-404-inner container'>
                 <h1>404</h1>
