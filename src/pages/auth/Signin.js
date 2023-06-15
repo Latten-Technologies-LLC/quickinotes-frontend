@@ -46,7 +46,12 @@ const Signin = () => {
 
       const data = await response.json();
       if (data?.error) {
-        throw data?.error;
+        if(APP_ENV !== "production")
+        {
+          throw data?.error;
+        }else{
+          message.error('Error has occurred!');
+        }        
       } else {
         // set the token
         setToken(data.jwt);

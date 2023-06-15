@@ -11,10 +11,6 @@ import { FetchNotes, Note } from '../utils/Notes'
 
 // Page transitions
 import { motion } from "framer-motion";
-import { Square } from '../utils/Square';
-
-// Square
-import { SquareApi } from '../utils/Square';
 
 // Display ad
 import { DisplayAd } from '../utils/Ads';
