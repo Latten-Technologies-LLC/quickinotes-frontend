@@ -135,7 +135,7 @@ export const bookmark = (e) => {
                     }
                 }
 
-                const noteFromServer = await http.put("http://localhost:1337/api/notes/" + noteId, noteData).then((response) => {
+                const noteFromServer = await http.put("/notes/" + noteId, noteData).then((response) => {
                     console.log(response.data.data);
                 }).catch((err) => {
                     console.log(err);

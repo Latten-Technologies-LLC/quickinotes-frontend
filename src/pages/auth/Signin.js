@@ -64,7 +64,11 @@ const Signin = () => {
         window.location.href = "/notes";
       }
     } catch (error) {
-      console.error(error);
+      if (APP_ENV === "development") {
+        console.log(error);
+      }
+
+      message.error("Invalid Email or Password!");
       setError(error?.message ?? "Something went wrong!");
     } finally {
       setIsLoading(false);
@@ -103,7 +107,7 @@ const Signin = () => {
 
                   <Form.Item>
                       <Button type="primary" htmlType="submit" className="login_submit_btn">
-                          Login {isLoading && <Spin size="small" />}
+                          Login <span style={{paddingLeft: '10px'}}>{isLoading && <Spin size="small" color="white"/>}</span>
                       </Button>
                   </Form.Item>
               </Form>

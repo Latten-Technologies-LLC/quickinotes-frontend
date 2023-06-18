@@ -107,7 +107,7 @@ const Signout = () => {
 
                   <Form.Item>
                       <Button type="primary" htmlType="submit" className="login_submit_btn">
-                          Signup {isLoading && <Spin size="small" />}
+                          Signup <span style={{paddingLeft: '10px'}}>{isLoading && <Spin size="small" color="white"/>}</span>
                       </Button>
                   </Form.Item>
               </Form>
