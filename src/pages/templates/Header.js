@@ -30,8 +30,8 @@ export default function Header({pageMeta, noteMeta, token, style="auth"}) {
   return (
     <header className={`header ${!token ? "unlogged" : ""}`}>
         <div className='header-inner container'>
-            <div className='header-row row'>
-                <div className='header-menu-action col-lg-6'>
+            <div className='header-row'>
+                <div className='header-menu-action'>
                     <div className="header-menu-action-inner">
                         {token ?
                         <button onClick={handleSidebar} className='header-menu-action-inner-button'><FontAwesomeIcon icon={Icons.faBars} /></button>
@@ -39,7 +39,7 @@ export default function Header({pageMeta, noteMeta, token, style="auth"}) {
                         <h2><a href="/">{APP_TITLE}</a></h2>
                     </div>
                 </div>
-                <div className='header-interactions col-lg-6'>
+                <div className='header-interactions'>
                     <div className="header-search col-lg-12">
                         {token ? 
                             <input type="text" placeholder="Search notes..." />

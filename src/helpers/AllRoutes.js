@@ -29,6 +29,11 @@ import NotFound from '../pages/messages/NotFound';
 // Page transitions
 import { AnimatePresence } from "framer-motion";
 
+// Secondary Pages
+import About from '../pages/secondary/About';
+import Terms from '../pages/secondary/Terms';
+import Privacy from '../pages/secondary/Privacy';
+
 export const AllRoutes = () => {
 
   const location = useLocation();
@@ -49,6 +54,10 @@ export const AllRoutes = () => {
 
       <Route path="/auth/signin" element={!isAuthenticated() ? <Signin/> : <Navigate to="/notes" />} />
       <Route path="/auth/signup" element={!isAuthenticated() ? <Signup/> : <Navigate to="/notes" />} />
+
+      <Route path="/about" element={<About />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/privacy" element={<Privacy />} />
 
       <Route path="/404" element={isAuthenticated() ? <Notes/> : <NotFound />} />
       <Route path="*" element={<NotFound />} />
