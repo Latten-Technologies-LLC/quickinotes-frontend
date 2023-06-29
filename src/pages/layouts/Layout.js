@@ -29,6 +29,8 @@ const Layout = ({pageMeta, children}) => {
             <meta name="keywords" content={ APP_KEYWORDS} />
             <meta name="author" content={ APP_AUTHOR } />
             <meta name="viewport" content={ APP_VIEWPORT } />
+            <meta name="theme-color" content="#000000" />
+            <base href={ APP_URL } />
             <link rel="icon" type="image/png" href="/images/quickinotes-logo-favicon.png" />
             <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-lc-white-solid.png" />
             <script src="https://kit.fontawesome.com/0a79c5bf9a.js" crossorigin="anonymous"></script>

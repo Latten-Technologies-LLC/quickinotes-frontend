@@ -1,11 +1,11 @@
 import React from 'react'
 
-import Layout from './layouts/Layout'
+import AuthLayout from './layouts/AuthLayout'
 
 export default function Notebooks() {
   return (
-    <Layout pageMeta={{title: "Settings", footer: false, header: true}}>
+    <AuthLayout pageMeta={{title: "Settings", footer: false, header: true}}>
       <div>Notebooks</div>
-    </Layout>
+    </AuthLayout>
   )
 }

@@ -13,6 +13,9 @@ $font-color: #111111;
 $accent-1: #C7EBB3;
 $accent-2: #F4DFCD;
 
+// Box shadow
+$box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
+
 // Reset
 * {
     font-family: 'Poppins', monospace;
@@ -360,6 +363,25 @@ p {}
                 text-decoration: none;
                 color: white;
             }
+        }
+    }
+}
+
+.tabbar-main{
+    position: fixed;
+    bottom: 50px;
+
+    width: 100%;
+    height: 60px;
+
+    .tabbar-inner{
+        background: white;
+        padding: 10px;
+
+        border-radius: 5px;
+        
+        .tabbar-row{
+            text-align: left;
         }
     }
 }

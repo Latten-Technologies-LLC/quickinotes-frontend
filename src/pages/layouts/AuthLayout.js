@@ -7,6 +7,7 @@ import { getToken } from '../../helpers/tokens'
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import Sidebar from '../templates/Sidebar';
+import Tabbar from '../templates/Tabbar';
 
 // Import .ENV vars
 import { APP_ENV, APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHARSET, APP_VIEWPORT } from '../../config/const';
@@ -34,6 +35,7 @@ const AuthLayout = ({pageMeta, children}) => {
             <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
             <link rel="icon" type="image/png" href="/images/quickinotes-logo-favicon.png" />
             <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-lc-white-solid.png" />
+            <base href={ APP_URL } />
         </Helmet>
         <motion.div className='website' initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -47,6 +49,8 @@ const AuthLayout = ({pageMeta, children}) => {
                   : null}
                   
                   {children}
+
+                  <Tabbar />
 
                   {pageMeta.footer ?
                     <Footer url={ APP_URL }/>
