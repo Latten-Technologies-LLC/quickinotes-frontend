@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from "../context/AuthContext";
 
 import NotFound from './messages/NotFound';
-import Layout from './layouts/Layout'
+import AuthLayout from './layouts/AuthLayout'
 
 import { FetchBookmarkedNotes, Note } from '../utils/Notes'
 
@@ -41,6 +41,6 @@ export default function Bookmarks() {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </AuthLayout>
     )
 }

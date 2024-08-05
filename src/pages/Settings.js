@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL, APP_ENV } from "../config/const";
-import Layout from './layouts/Layout';
+import AuthLayout from './layouts/AuthLayout'
 
 // React router
 import { useNavigate } from "react-router-dom";
@@ -104,6 +104,6 @@ export default function Settings() {
                 </div>
             </div>
           </div>
-      </Layout>
+      </AuthLayout>
   )
 }
