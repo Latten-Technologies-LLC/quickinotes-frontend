@@ -11,6 +11,9 @@ import Sidebar from '../templates/Sidebar';
 // Import .ENV vars
 import { APP_ENV, APP_TITLE, APP_DESCRIPTION, APP_KEYWORDS, APP_AUTHOR, APP_URL, APP_CHARSET, APP_VIEWPORT } from '../../config/const';
 
+// Import framer-motion
+import { motion } from "framer-motion";
+
 const AuthLayout = ({pageMeta, children}) => {
   return (
     <HelmetProvider>
@@ -36,9 +39,15 @@ const AuthLayout = ({pageMeta, children}) => {
             <Sidebar token={getToken()}/>
 
             <section className='auth-website-inner'>
-                <Header pageMeta={pageMeta} token={getToken()}/>
-                {children}
-                <Footer url={ APP_URL }/>
+                  {pageMeta.header ? 
+                    <Header pageMeta={pageMeta} token={getToken()}/>
+                  : null}
+                  
+                  {children}
+
+                  {pageMeta.footer ?
+                    <Footer url={ APP_URL }/>
+                  : null}
             </section>
 
         </div>

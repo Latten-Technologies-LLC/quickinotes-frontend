@@ -21,7 +21,7 @@ export default function Notes() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'Notes' }}>
+    <AuthLayout pageMeta={{ title: 'Notes', footer: false, header: true }}>
       <div className='page-timeline'>
         <div className='page-timeline-inner container'>
           <div className='page-timeline-header'>

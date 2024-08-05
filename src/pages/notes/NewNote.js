@@ -59,8 +59,8 @@ export default function NewNote() {
 
 
     return (
-        <AuthLayout pageMeta={{ title: 'New Note' }}>
-            <form onSubmit={createNote} method='PUT'>
+        <AuthLayout pageMeta={{ title: 'New Note', footer: false, header: true }}>
+            <form onSubmit={createNote} method='POST'>
                 <div className='page page-notes-head'>
                     <div className='page-notes-head-title container'>
                         <h1>Create new Note</h1>

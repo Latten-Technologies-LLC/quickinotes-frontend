@@ -62,7 +62,7 @@ export default function ViewNote() {
   }
 
   return (
-    <AuthLayout pageMeta={{ title: 'View Note' }}>
+    <AuthLayout pageMeta={{ title: 'View Note', footer: false, header: true }}>
       <div className='page page-notes-head'>
         <div className='page-notes-head-title container'>
           <h1>{note.note_name}</h1>

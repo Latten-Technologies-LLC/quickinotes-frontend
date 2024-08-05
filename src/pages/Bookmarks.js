@@ -21,7 +21,7 @@ export default function Bookmarks() {
         return <NotFound />;
     }
     return (
-        <Layout pageMeta={{ title: 'Bookmarks' }}>
+        <AuthLayout pageMeta={{ title: 'Bookmarks', footer: false, header: true }}>
             <div className='page-timeline'>
                 <div className='page-timeline-inner container'>
                     <div className='page-timeline-header'>

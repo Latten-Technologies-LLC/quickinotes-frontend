@@ -54,7 +54,7 @@ export default function Settings() {
   }
 
   return (
-      <Layout pageMeta={{title: "Settings"}}>
+      <AuthLayout pageMeta={{title: "Settings", footer: false, header: true}}>
           <div className='page-settings'>
             <div className='page-settings-inner container-fluid'>
                 <div className='page-settings-row'>
