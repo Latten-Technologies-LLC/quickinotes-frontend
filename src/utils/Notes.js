@@ -24,7 +24,12 @@ import { message, } from "antd";
 export function FetchNotes() {
     const { user } = useAuthContext();
 
-    return user?.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    if(user?.notes)
+    {
+        return user?.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    } else{
+        return [];
+    }
 }
 
 /**
@@ -38,12 +43,17 @@ export function FetchNotes() {
 export function FetchDraftNotes() {
     const { user } = useAuthContext();
 
-    var draftNotes = user?.notes.filter(function (note) {
-        console.log(note);
-        return note.draft == true;
-    });
+    if(user?.notes)
+    {
+        var draftNotes = user?.notes.filter(function (note) {
+            console.log(note);
+            return note.draft == true;
+        });
 
-    return draftNotes;
+        return draftNotes;
+    }else{
+        return [];
+    }
 }
 
 /**
@@ -56,12 +66,17 @@ export function FetchDraftNotes() {
 export function FetchBookmarkedNotes() {
     const { user } = useAuthContext();
 
-    // Sort notes by bookmarked
-    var bookmarkedNotes = user?.notes.filter(function (note) {
-        console.log(note);
-        return note.bookmarked == true;
-    });
-    return bookmarkedNotes;
+    if(user?.notes)
+    {
+        // Sort notes by bookmarked
+        var bookmarkedNotes = user?.notes.filter(function (note) {
+            console.log(note);
+            return note.bookmarked == true;
+        });
+        return bookmarkedNotes;
+    }else{
+        return [];
+    }
 }
 
 /**
