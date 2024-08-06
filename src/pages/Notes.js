@@ -9,6 +9,12 @@ import AuthLayout from './layouts/Layout'
 
 import { FetchNotes, Note } from '../utils/Notes'
 
+// Page transitions
+import { motion } from "framer-motion";
+
+// Display ad
+import DisplayAd  from '../utils/Ads';
+
 export default function Notes() {
   const navigate = useNavigate()
   const { user } = useAuthContext();
@@ -16,8 +22,21 @@ export default function Notes() {
   // Fetch all notes
   const notes = FetchNotes(user);
 
-  if (!isAuthenticated()) {
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+  
+  if (isAuthenticated() === null) {
     return <NotFound />;
+    //navigate('/404');
   }
 
   return (
@@ -34,11 +53,25 @@ export default function Notes() {
               </ul>
             </div>
           </div>
-          <div className='page-timeline-all-notes'>
-            {notes?.map((note, key) => (
-              <Note key={key} note={note} />
-            ))}
-          </div>
+          <motion.div className='page-timeline-all-notes' variants={container}
+    initial="hidden"
+    animate="visible" >
+            { !user?.hideAds ? <DisplayAd show={{show: "false"}}/> : null }
+
+            {notes?.length > 0 ? 
+              notes?.map((note, key) => (
+                <Note key={key} note={note} />
+              ))
+            : 
+              <div className='page-timeline-all-notes-empty'>
+                <div className='page-timeline-all-notes-empty-inner'>
+                  <h2>Nothing to see here</h2>
+                  <p>When you create notes, they will show up here.</p>
+                  <a className='btn btn-round' href="/notes/new">Create a note</a>
+                </div>
+              </div>
+            }
+          </motion.div>
         </div>
       </div>
     </AuthLayout>
