@@ -19,6 +19,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 
+// Draft
+import { saveDraft } from '../../utils/Notes';
+
 export default function EditNote() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
@@ -61,7 +64,9 @@ export default function EditNote() {
     const noteData = {
       data: {
         note_name,
-        note_body
+        note_body,
+        draft: false,
+        
       }
     }
 
@@ -130,6 +135,7 @@ export default function EditNote() {
                 />
                 <div className='page-notes-view-note-content-actions'>
                   <input type="submit" className="btn btn-round" value="Save" />
+                  <button onClick={saveDraft} data-id={id} className="btn btn-round">Save as Draft</button>
                 </div>
               </div>
             </div>

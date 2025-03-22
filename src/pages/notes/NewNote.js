@@ -11,6 +11,7 @@ import AuthLayout from '../layouts/Layout'
 
 // Tinymce
 import { Editor } from '@tinymce/tinymce-react';
+import { saveDraft } from '../../utils/Notes';
 
 export default function NewNote() {
     const navigate = useNavigate();

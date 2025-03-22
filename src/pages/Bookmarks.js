@@ -35,9 +35,18 @@ export default function Bookmarks() {
                         </div>
                     </div>
                     <div className='page-timeline-all-notes'>
-                        {bookmarks?.map((note, key) => (
-                            <Note key={key} note={note} checkBookmarked='true' />
-                        ))}
+                        {bookmarks?.length > 0 ? 
+                            bookmarks?.map((note, key) => (
+                                <Note key={key} note={note} checkBookmarked='true' />
+                            )) :
+                            <div className='page-timeline-all-notes-empty'>
+                                <div className='page-timeline-all-notes-empty-inner'>
+                                <h2>Nothing to see here</h2>
+                                <p>When you bookmark notes, they will show up here.</p>
+                                <a className='btn btn-round' href="/notes">View all notes</a>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

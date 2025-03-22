@@ -109,6 +109,39 @@ export const deleteNote = (e) => {
 }
 
 /**
+ * Save note as draft
+ * Type: PUT
+ * Desc: Saves a note as a draft
+ * 
+ * @param {Event Var} e
+ */
+export const saveDraft = (e) => {
+    e.preventDefault();
+
+    if (e.currentTarget.dataset.id !== undefined) {
+        const saveDraft = async () => {
+            if (e.currentTarget.dataset.id) {
+                const noteId = e.currentTarget.dataset.id;
+
+                const noteData = {
+                    data: {
+                        "draft": true,
+                    }
+                }
+
+                const noteFromServer = await http.put("/notes/" + noteId, noteData).then((response) => {
+                    message.success("Note saved as draft");
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }
+
+        saveDraft();
+    }
+}
+
+/**
  * Bookmark note
  * Type: PUT
  * Desc: Bookmarks a note
@@ -123,6 +156,9 @@ export const bookmark = (e) => {
             if (e.currentTarget.dataset.id) {
                 const thisBookmarked = e.currentTarget.dataset.bookmarked;
                 const noteId = e.currentTarget.dataset.id;
+
+                console.log(thisBookmarked);
+                console.log(noteId);
 
                 var set;
                 var msg;
@@ -144,7 +180,14 @@ export const bookmark = (e) => {
                 }
 
                 const noteFromServer = await http.put("/notes/" + noteId, noteData).then((response) => {
-                    console.log(response.data.data);
+                    if (set) {
+                        msg = "Note bookmarked";
+                    } else {
+                        msg = "Note unbookmarked";
+                    }
+
+                    message.success(msg);
+                    //window.location.reload();
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -153,7 +196,6 @@ export const bookmark = (e) => {
 
         makeBookmark();
     }
-    console.log(e.currentTarget.dataset.id);
 }
 
 /**
@@ -230,9 +272,11 @@ export function Note({ note, checkBookmarked }) {
                 </div>
                 <div className='note-body-actions'>
                     <div className='note-body-actions-btns'>
-                        <a onClick={routeToNoteView} className='btn btn-round' href={`/notes/v/${id}`} alt="View Note">View</a>
-                        <a onClick={bookmark} data-id={id} data-status={bookmarked} className={`btn btn-round ${bookmarkClass}`} title="View Note" alt="View Note"><i className="fa-solid fa-star"></i></a>
-                        <a onClick={routeToNoteEdit} className='btn btn-round' href={`/notes/e/${id}`} alt="Edit Note"><i className="fa-solid fa-pen"></i></a>
+                        <a onClick={routeToNoteView} className='btn btn-round' href={`/notes/v/${id}`} alt="View Note" title="View Note">View</a>
+                        {note.draft == false ?
+                        <a onClick={bookmark} data-id={id} data-bookmarked={bookmarked} className={`btn btn-round ${bookmarkClass}`} title="Bookmark" alt="Bookmark Note"><i className="fa-solid fa-star"></i></a>
+                        : <a onClick={saveDraft} data-id={id} className='btn btn-round' title="Save as Note" alt="Save as note"><i className="fa-solid fa-save"></i></a>}
+                        <a onClick={routeToNoteEdit} className='btn btn-round' href={`/notes/e/${id}`} alt="Edit Note" title="Edit Note"><i className="fa-solid fa-pen"></i></a>
                     </div>
                 </div>
             </div>

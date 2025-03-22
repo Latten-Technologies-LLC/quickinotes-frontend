@@ -36,9 +36,18 @@ export default function Drafts() {
             </div>
           </div>
           <div className='page-timeline-all-notes'>
-            {drafts?.map((note, key) => (
-              <Note key={key} note={note} />
-            ))}
+            {drafts?.length > 0 ? 
+              drafts?.map((note, key) => (
+                <Note key={key} note={note} />
+              )) :
+              <div className='page-timeline-all-notes-empty'>
+                <div className='page-timeline-all-notes-empty-inner'>
+                  <h2>Nothing to see here</h2>
+                  <p>When you save drafts, they will show up here.</p>
+                  <a className='btn btn-round' href="/notes">View all notes</a>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>

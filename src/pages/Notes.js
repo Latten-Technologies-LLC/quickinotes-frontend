@@ -53,9 +53,7 @@ export default function Notes() {
               </ul>
             </div>
           </div>
-          <motion.div className='page-timeline-all-notes' variants={container}
-    initial="hidden"
-    animate="visible" >
+          <motion.div className='page-timeline-all-notes' variants={container} initial="hidden" animate="visible" >
             { !user?.hideAds ? <DisplayAd show={{show: "false"}}/> : null }
 
             {notes?.length > 0 ? 

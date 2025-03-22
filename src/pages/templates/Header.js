@@ -28,7 +28,7 @@ export default function Header({pageMeta, noteMeta, token}) {
                 <div className='header-menu-action col-lg-6'>
                     <div className="header-menu-action-inner">
                         <button onClick={handleSidebar} className='header-menu-action-inner-button'><i className="fa-solid fa-bars"></i></button>
-                        <h2><a href="/notes">Quickinotes</a></h2>
+                        <h2><a href="/notes">Jotlin</a></h2>
                     </div>
                 </div>
                 <div className='header-interactions col-lg-6'>
